@@ -69,14 +69,14 @@ defined( 'ABSPATH' ) || exit;
 
     public function __construct(){
 
+        require_once 'utils/dump.php';
         require_once 'autoloader.php';
 
         Autoloader::run();
        
         $test = new  Core\Test();
         $msg = $test->get_test();
-
-        var_dump($this->widgets_url());
+        
         
     }
 
