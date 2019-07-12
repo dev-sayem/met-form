@@ -18,7 +18,6 @@ defined( 'ABSPATH' ) || exit;
 
  final class Korn{
     
-
     public function version(){
         return '1.0.0';
     }
@@ -77,9 +76,9 @@ defined( 'ABSPATH' ) || exit;
         $test = new  Core\Test();
         $msg = $test->get_test();
         
-        
-    }
+        new Core\Entries\Cpt;
 
+    }
 
  }
  new Korn();
