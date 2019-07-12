@@ -38,11 +38,11 @@ Class Entry extends \Korn\Base\Cpt {
             'set_featured_image'    => esc_html__( 'Set featured image', 'korn' ),
             'remove_featured_image' => esc_html__( 'Remove featured image', 'korn' ),
             'use_featured_image'    => esc_html__( 'Use as featured image', 'korn' ),
-            'insert_into_item'      => esc_html__( 'Insert into item', 'korn' ),
-            'uploaded_to_this_item' => esc_html__( 'Uploaded to this item', 'korn' ),
+            'insert_into_item'      => esc_html__( 'Insert into entry', 'korn' ),
+            'uploaded_to_this_item' => esc_html__( 'Uploaded to this entry', 'korn' ),
             'items_list'            => esc_html__( 'Entries list', 'korn' ),
             'items_list_navigation' => esc_html__( 'Entries list navigation', 'korn' ),
-            'filter_items_list'     => esc_html__( 'Filter items list', 'korn' ),
+            'filter_items_list'     => esc_html__( 'Filter entry list', 'korn' ),
         );
         $rewrite = array(
             'slug'                  => 'korn-form-entry',
