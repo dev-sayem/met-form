@@ -59,7 +59,7 @@ Class Entry extends \Korn\Base\Cpt {
             'public'                => true,
             'show_ui'               => true,
             'show_in_menu'          => true,
-            'menu_position'         => 5,
+            'menu_position'         => 10,
             'show_in_admin_bar'     => true,
             'show_in_nav_menus'     => false,
             'can_export'            => true,
