@@ -1,8 +1,8 @@
 <?php
 
-namespace MetForm\Core\Entries;
+namespace MetForm\Core\Forms;
 
-Class Entry extends \MetForm\Base\Cpt {
+Class Form extends \MetForm\Base\Cpt{
 
     public function __construct()
     {
@@ -10,18 +10,18 @@ Class Entry extends \MetForm\Base\Cpt {
     }
 
     public function get_name(){
-        return 'metform-entry';
+        return 'metform-form';
     }
 
     public function post_type()
     {
         $labels = array(
-            'name'                  => _x( 'Form entries', 'Post Type General Name', 'met-form' ),
-            'singular_name'         => _x( 'Form entry', 'Post Type Singular Name', 'met-form' ),
-            'menu_name'             => esc_html__( 'Form Entry', 'met-form' ),
-            'name_admin_bar'        => esc_html__( 'Form Entry', 'met-form' ),
-            'archives'              => esc_html__( 'Entry Archives', 'met-form' ),
-            'attributes'            => esc_html__( 'Entry Attributes', 'met-form' ),
+            'name'                  => _x( 'Forms', 'Post Type General Name', 'met-form' ),
+            'singular_name'         => _x( 'Form', 'Post Type Singular Name', 'met-form' ),
+            'menu_name'             => esc_html__( 'Form', 'met-form' ),
+            'name_admin_bar'        => esc_html__( 'Form', 'met-form' ),
+            'archives'              => esc_html__( 'Form Archives', 'met-form' ),
+            'attributes'            => esc_html__( 'Form Attributes', 'met-form' ),
             'parent_item_colon'     => esc_html__( 'Parent Item:', 'met-form' ),
             'all_items'             => esc_html__( 'All Items', 'met-form' ),
             'add_new_item'          => esc_html__( 'Add New Item', 'met-form' ),
@@ -40,19 +40,19 @@ Class Entry extends \MetForm\Base\Cpt {
             'use_featured_image'    => esc_html__( 'Use as featured image', 'met-form' ),
             'insert_into_item'      => esc_html__( 'Insert into item', 'met-form' ),
             'uploaded_to_this_item' => esc_html__( 'Uploaded to this item', 'met-form' ),
-            'items_list'            => esc_html__( 'Form entries list', 'met-form' ),
-            'items_list_navigation' => esc_html__( 'Form entries list navigation', 'met-form' ),
-            'filter_items_list'     => esc_html__( 'Filter from entry list', 'met-form' ),
+            'items_list'            => esc_html__( 'Forms list', 'met-form' ),
+            'items_list_navigation' => esc_html__( 'Forms list navigation', 'met-form' ),
+            'filter_items_list'     => esc_html__( 'Filter froms list', 'met-form' ),
         );
         $rewrite = array(
-            'slug'                  => 'metform-entry',
+            'slug'                  => 'metform-form',
             'with_front'            => true,
             'pages'                 => false,
             'feeds'                 => false,
         );
         $args = array(
-            'label'                 => esc_html__( 'Form entry', 'met-form' ),
-            'description'           => esc_html__( 'metform-entry', 'met-form' ),
+            'label'                 => esc_html__( 'Forms', 'met-form' ),
+            'description'           => esc_html__( 'metform-form', 'met-form' ),
             'labels'                => $labels,
             'supports'              => array( 'title', 'editor', 'elementor', 'permalink' ),
             'hierarchical'          => true,
@@ -79,5 +79,3 @@ Class Entry extends \MetForm\Base\Cpt {
     }
 
 }
-
-?>
