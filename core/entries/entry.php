@@ -1,8 +1,8 @@
 <?php
 
-namespace Korn\Core\Entries;
+namespace MetForm\Core\Entries;
 
-Class Entry extends \Korn\Base\Cpt {
+Class Entry extends \MetForm\Base\Cpt {
 
     public function __construct()
     {

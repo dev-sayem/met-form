@@ -1,8 +1,8 @@
 <?php
 
-namespace Korn\Core\Settings;
+namespace MetForm\Core\Settings;
 
-Class Setting extends \Korn\Base\Cpt{
+Class Setting extends \MetForm\Base\Cpt{
 
     public function __construct()
     {

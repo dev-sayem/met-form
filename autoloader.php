@@ -1,11 +1,11 @@
 <?php
 
-namespace Korn;
+namespace MetForm;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Korn autoloader.
+ * MetForm autoloader.
  * Handles dynamically loading classes only when needed.
  *
  * @since 1.0.0

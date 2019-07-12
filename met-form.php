@@ -1,22 +1,22 @@
 <?php
 
-namespace Korn;
+namespace MetForm;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Plugin Name: Advance Form For Elementor
+ * Plugin Name: MetForm
  * Plugin URI:  https://xpeedstudio.com/korn/
  * Description: Most powerful plugin created to make building elementor forms
  * Version:     1.0.0
  * Author:      XpeedStudio
  * Author URI:  https://xpeedstudio.com
- * Text Domain: korn
+ * Text Domain: metform
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
- final class Korn{
+ final class MetForm{
     
     public function version(){
         return '1.0.0';
@@ -83,6 +83,6 @@ defined( 'ABSPATH' ) || exit;
 
  }
 
- new Korn();
+ new MetForm();
 
 

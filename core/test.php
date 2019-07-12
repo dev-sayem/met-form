@@ -1,6 +1,6 @@
 <?php
 
-namespace Korn\Core;
+namespace MetForm\Core;
 
 class Test{
 

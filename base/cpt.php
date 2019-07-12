@@ -1,6 +1,6 @@
 <?php
 
-namespace Korn\Base;
+namespace MetForm\Base;
 
 abstract Class Cpt{
 
