@@ -52,13 +52,14 @@ Class Form extends \MetForm\Base\Cpt{
         );
         $args = array(
             'label'                 => esc_html__( 'Forms', 'met-form' ),
-            'description'           => esc_html__( 'metform-form', 'met-form' ),
+            'description'           => esc_html__( 'metform form', 'met-form' ),
             'labels'                => $labels,
             'supports'              => array( 'title', 'editor', 'elementor', 'permalink' ),
             'hierarchical'          => true,
             'public'                => true,
             'show_ui'               => true,
             'show_in_menu'          => true,
+            'menu_icon'             => 'dashicons-text-page',
             'menu_position'         => 5,
             'show_in_admin_bar'     => true,
             'show_in_nav_menus'     => false,
@@ -71,7 +72,7 @@ Class Form extends \MetForm\Base\Cpt{
             'publicly_queryable'    => true,
             'capability_type'       => 'page',
             'show_in_rest'          => true,
-            'rest_base'             => 'met-form-content',
+            'rest_base'             => $this->get_name(),
         );
 
         return $args;
