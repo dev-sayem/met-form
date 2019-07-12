@@ -2,11 +2,15 @@
 
 namespace Korn\Core\Entries;
 
-Class Cpt extends \Korn\Base\Cpt {
+Class Entry extends \Korn\Base\Cpt {
 
     public function __construct()
     {
         parent::init();
+    }
+
+    public function get_name(){
+        return 'korn-form-entry';
     }
 
     public function post_type()
@@ -69,7 +73,9 @@ Class Cpt extends \Korn\Base\Cpt {
             'show_in_rest'          => true,
             'rest_base'             => 'korn-content',
         );
-        register_post_type( 'korn-form-entry', $args );
+
+        return $args;
+
     }
 
 }

@@ -76,7 +76,7 @@ defined( 'ABSPATH' ) || exit;
         $test = new  Core\Test();
         $msg = $test->get_test();
         
-        new Core\Entries\Cpt;
+        new Core\Entries\Entry;
 
     }
 
