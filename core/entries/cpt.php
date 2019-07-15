@@ -2,7 +2,7 @@
 
 namespace MetForm\Core\Entries;
 
-Class Entry extends \MetForm\Base\Cpt {
+Class Cpt extends \MetForm\Base\Cpt {
 
     public function __construct()
     {

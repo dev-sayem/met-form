@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Plugin Name: MetForm
- * Plugin URI:  https://xpeedstudio.com/korn/
+ * Plugin URI:  https://xpeedstudio.com/metform/
  * Description: Most powerful plugin created to make building elementor forms
  * Version:     1.0.0
  * Author:      XpeedStudio
@@ -35,35 +35,35 @@ defined( 'ABSPATH' ) || exit;
     }
 
     public function core_url(){
-        return self::plugin_url() . 'core/';
+        return $this->plugin_url() . 'core/';
     }
 
     public function core_dir(){
-        return self::plugin_dir() . 'core/';
+        return $this->plugin_dir() . 'core/';
     }
 
     public function base_url(){
-        return self::plugin_url() . 'base/';
+        return $this->plugin_url() . 'base/';
     }
 
     public function base_dir(){
-        return self::plugin_dir() . 'base/';
+        return $this->plugin_dir() . 'base/';
     }
 
     public function utils_url(){
-        return self::plugin_url() . 'utils/';
+        return $this->plugin_url() . 'utils/';
     }
 
     public function utils_dir(){
-        return self::plugin_dir() . 'utils/';
+        return $this->plugin_dir() . 'utils/';
     }
 
     public function widgets_url(){
-        return self::plugin_url() . 'widgets/';
+        return $this->plugin_url() . 'widgets/';
     }
 
     public function widgets_dir(){
-        return self::plugin_dir() . 'widgets/';
+        return $this->plugin_dir() . 'widgets/';
     }
 
     public function __construct(){
@@ -76,8 +76,9 @@ defined( 'ABSPATH' ) || exit;
         $test = new  Core\Test();
         $msg = $test->get_test();
         
-        new Core\Entries\Entry;
+        new Core\Entries\Cpt;
         new Core\Forms\Form;
+        Widgets\Manifest::get_instance()->init();
         
     }
 
