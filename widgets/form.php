@@ -5,7 +5,8 @@ namespace Elementor;
 class Widget_My_Form extends Widget_Base {
 	public function get_name() {
 		return 'my-form';
-	}
+    }
+    
 	public function get_title() {
 		return __( 'My Form', 'metform' );
 	}
@@ -34,23 +35,22 @@ class Widget_My_Form extends Widget_Base {
         
 	}
 	protected function render( $instance = [] ) {
-    
+
+        $id = $this->get_id_int();
 		$settings = $this->get_settings_for_display();
-		$rest_url = get_rest_url();
+        $rest_url = get_rest_url();
 
         echo '<div class="wrapper">'
 		?>
-		<form id="insert_post" action="<?php echo $rest_url; ?>my-route/insert-post" method="POST">
+		<form id="insert_post" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
 			<div style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></div>
-            <input type="text" class="user-name" name="user_name" id="user_name"  placeholder="User Name">
+            <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
             <br>
-            <input type="text" class="form-title" name="title" id="title"  placeholder="Title">
+            <input type="number" class="form-control" name="id" id="id"  placeholder="id">
             <br>
-            <input type="textarea" class="form-content" name="content" id="content"  placeholder="Post content" rows="4" cols="90">
+            <textarea class="form-control" name="data" id="data" cols="15" rows="5" placeholder="Enter here data"></textarea>
             <br>
 			<br>
-			<input type="number" class="cat_id" name="cat_id" id="cat_id"  placeholder="Category ID">
-            <br>
 			<input type="submit" name="submit" class="button btn btn-success" id="submit_btn" value="<?php echo $settings['form-btn-text']; ?>" />
             <br>
             <br>

@@ -4,10 +4,6 @@ namespace MetForm\Core\Forms;
 
 Class Form extends \MetForm\Base\Cpt{
 
-    public function __construct()
-    {
-        parent::init();
-    }
 
     public function get_name(){
         return 'metform-form';

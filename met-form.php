@@ -1,9 +1,5 @@
 <?php
 
-namespace MetForm;
-
-defined( 'ABSPATH' ) || exit;
-
 /**
  * Plugin Name: MetForm
  * Plugin URI:  https://xpeedstudio.com/metform/
@@ -16,74 +12,13 @@ defined( 'ABSPATH' ) || exit;
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
- final class MetForm{
-    
-    public function version(){
-        return '1.0.0';
-    }
 
-    public function package_type(){
-        return 'free';
-    }
+defined( 'ABSPATH' ) || exit;
 
-    public function plugin_url(){
-        return trailingslashit(plugin_dir_url( __FILE__ ));
-    }
+require 'plugin.php';
 
-    public function plugin_dir(){
-        return trailingslashit(plugin_dir_path( __FILE__ ));
-    }
+function metform(){
+    return MetForm\Plugin::instance();
+}
 
-    public function core_url(){
-        return $this->plugin_url() . 'core/';
-    }
-
-    public function core_dir(){
-        return $this->plugin_dir() . 'core/';
-    }
-
-    public function base_url(){
-        return $this->plugin_url() . 'base/';
-    }
-
-    public function base_dir(){
-        return $this->plugin_dir() . 'base/';
-    }
-
-    public function utils_url(){
-        return $this->plugin_url() . 'utils/';
-    }
-
-    public function utils_dir(){
-        return $this->plugin_dir() . 'utils/';
-    }
-
-    public function widgets_url(){
-        return $this->plugin_url() . 'widgets/';
-    }
-
-    public function widgets_dir(){
-        return $this->plugin_dir() . 'widgets/';
-    }
-
-    public function __construct(){
-
-        require_once 'utils/dump.php';
-        require_once 'autoloader.php';
-
-        Autoloader::run();
-       
-        $test = new  Core\Test();
-        $msg = $test->get_test();
-        
-        new Core\Entries\Cpt;
-        new Core\Forms\Form;
-        Widgets\Manifest::get_instance()->init();
-        
-    }
-
- }
-
- new MetForm();
-
-
+add_action( 'plugins_loaded', 'metform' );

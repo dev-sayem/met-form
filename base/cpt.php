@@ -4,7 +4,7 @@ namespace MetForm\Base;
 
 abstract Class Cpt{
 
-    public function init() {
+    public function __construct() {
         
         $name = $this->get_name();
         $args = $this->post_type();

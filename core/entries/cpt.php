@@ -4,11 +4,6 @@ namespace MetForm\Core\Entries;
 
 Class Cpt extends \MetForm\Base\Cpt {
 
-    public function __construct()
-    {
-        parent::init();
-    }
-
     public function get_name(){
         return 'metform-entry';
     }
@@ -54,7 +49,9 @@ Class Cpt extends \MetForm\Base\Cpt {
             'label'                 => esc_html__( 'Form entry', 'met-form' ),
             'description'           => esc_html__( 'metform-entry', 'met-form' ),
             'labels'                => $labels,
-            'supports'              => array( 'title', 'editor', 'elementor', 'permalink' ),
+            'supports'              => ['title'],
+            'capabilities'          => ['create_posts' => 'do_not_allow','update_posts' => 'do_not_allow'],
+            'map_meta_cap'          => true,
             'hierarchical'          => true,
             'public'                => true,
             'show_ui'               => true,
@@ -65,13 +62,13 @@ Class Cpt extends \MetForm\Base\Cpt {
             'show_in_nav_menus'     => false,
             'can_export'            => true,
             'has_archive'           => false,
-            'publicly_queryable' => true,
+            'publicly_queryable'    => true,
             'rewrite'               => $rewrite,
-            'query_var' => true,
+            'query_var'             => true,
             'exclude_from_search'   => true,
             'publicly_queryable'    => true,
             'capability_type'       => 'page',
-            'show_in_rest'          => true,
+            'show_in_rest'          => false,
             'rest_base'             => $this->get_name(),
         );
 
@@ -80,5 +77,3 @@ Class Cpt extends \MetForm\Base\Cpt {
     }
 
 }
-
-?>
