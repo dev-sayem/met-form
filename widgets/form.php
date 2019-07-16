@@ -42,17 +42,24 @@ class Widget_My_Form extends Widget_Base {
 
         echo '<div class="wrapper">'
 		?>
-		<form id="insert_post" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
+		<form id="insert_post" name="data_insert" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
 			<p style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></p>
-            <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
+            <input type="text" class="elementor-field" name="title" id="title"  placeholder="Title">
             <br>
-            <input type="number" class="form-control" name="id" id="id"  placeholder="id">
             <br>
-            <textarea class="form-control" name="data" id="data" cols="15" rows="5" placeholder="Enter here data"></textarea>
+            <input type="number" class="elementor-field" name="id" id="id"  placeholder="id">
             <br>
+            <br>
+			<input type="text" class="elementor-field" name="name" id="name" placeholder="Name">
+			<br>
+			<br>
+			<input type="number" class="elementor-field" name="phone" id="phone" placeholder="Phone">
+			<br>
+			<br>
+			<input type="email" class="elementor-field" name="email" id="email" placeholder="Email">
+			<br>
 			<br>
 			<input type="submit" name="submit" class="button btn btn-success" id="submit_btn" value="<?php echo $settings['form-btn-text']; ?>" />
-            <br>
             <br>
         </form>
 		<?php

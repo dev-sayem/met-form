@@ -11,38 +11,10 @@ Class Api extends \MetForm\Base\Api{
 
     public function post_insert(){
         $form_id = $this->request['id'];
-        $form_title = $this->request['title'];
-        $form_data = $this->request['data'];
-        // print_r($_POST); exit();
-        // return $content_key;
-        
-        //$builder_post_title = 'entries-' . $content_type . '-' . $content_key;
-        $builder_post_id = get_page_by_title($form_title, OBJECT, 'metform-entry');
 
-        if(is_null($builder_post_id)){
-            $defaults = array(
-                'post_title' => $form_title,
-                'post_status' => 'publish',
-                'post_type' => 'metform-entry',
-            );
-            $builder_post_id = wp_insert_post($defaults);
+        $form_data = $this->request->get_params();
 
-            update_post_meta( $builder_post_id, 'metform_entries__form_data', $form_data );
-            update_post_meta( $builder_post_id, 'metform_entries__form_id', $form_id );
-
-            return [
-                'status' => 0,
-                'message' => 'inserted'
-            ];
-
-
-        }else{
-            $builder_post_id = $builder_post_id->ID;
-            return [
-                'status' => 1,
-                'message' => 'updated'
-            ];
-        }
+        Action::instance()->store($form_id, $form_data);
 
     }
 

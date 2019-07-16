@@ -75,10 +75,7 @@ public function __construct(){
 
     new Core\Forms\Form;
     Widgets\Manifest::get_instance()->init();
-
-
-
-    
+ 
 }
 
 public static function instance(){
