@@ -10,6 +10,7 @@ Class Api extends \MetForm\Base\Api{
     }
 
     public function post_insert(){
+        
         $form_id = $this->request['id'];
 
         $form_data = $this->request->get_params();
@@ -22,7 +23,6 @@ Class Api extends \MetForm\Base\Api{
         $content_id = $this->request['id'];
         $content_key = $this->request['key'];
         $content_type = $this->request['type'];
-        // return $content_key;
         
         $builder_post_title = 'entries-' . $content_type . '-' . $content_key;
         $builder_post_id = get_page_by_title($builder_post_title, OBJECT, 'metform-entry');

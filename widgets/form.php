@@ -36,7 +36,8 @@ class Widget_My_Form extends Widget_Base {
 	}
 	protected function render( $instance = [] ) {
 
-        $id = $this->get_id_int();
+        //$id = $this->get_id_int();
+        $id = 64;
 		$settings = $this->get_settings_for_display();
         $rest_url = get_rest_url();
 
@@ -44,11 +45,6 @@ class Widget_My_Form extends Widget_Base {
 		?>
 		<form id="insert_post" name="data_insert" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
 			<p style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></p>
-            <input type="text" class="elementor-field" name="title" id="title"  placeholder="Title">
-            <br>
-            <br>
-            <input type="number" class="elementor-field" name="id" id="id"  placeholder="id">
-            <br>
             <br>
 			<input type="text" class="elementor-field" name="name" id="name" placeholder="Name">
 			<br>

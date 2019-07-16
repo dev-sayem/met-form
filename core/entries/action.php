@@ -14,6 +14,7 @@ Class Action{
     private $entry_id;
     private $form_id;
     private $form_data;
+    private $title;
 
     public function __construct()
     {
@@ -32,9 +33,17 @@ Class Action{
 
         if( $this->entry_id == null ){
             $this->insert();
+            // return [
+            //     'status' => 1,
+            //     'message' => esc_html__('From submitted','metform'),
+            // ];
         }
         else {
             $this->update();
+            // return [
+            //     'status' => 1,
+            //     'message' => esc_html__('From updated','metform'),
+            // ];
         }
 
     }
@@ -59,10 +68,13 @@ Class Action{
         ];
     }
 
-    private function sanitize($form_data){
+    public function sanitize($form_data, $fields = null){
+        if($fields == null){
+            $fields = $this->fields;
+        }
         foreach( $form_data as $key => $value){
 
-            if(isset($this->fields[$key])){
+            if(isset($fields[$key])){
                 $this->form_data[ $key ] = $value;
             }
 
@@ -71,8 +83,10 @@ Class Action{
     
     private function insert(){
 
+        $this->title = get_the_title($this->form_id);
+
         $defaults = array(
-            'post_title' => 'This is tittle',
+            'post_title' => $this->title,
             'post_status' => 'publish',
             'post_type' => $this->post_type,
         );

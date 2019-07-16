@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
         console.log("post url : "+post_url);
 
         $.post(post_url, form_data, function(data) {
-            console.log("Response : "+data);
+            console.log("Response : status : "+data['status']+" msg : "+data['message']);
             var status = Number(data['status']);
             if (status == 1) {
 

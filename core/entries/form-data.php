@@ -22,11 +22,12 @@ Class Form_Data{
         wp_nonce_field('meta_nonce', 'meta_nonce');
 
         $value = get_post_meta($post->ID, 'metform_entries__form_id', true);
+        var_dump($value);
         ?>
 
-        <label for="id">Form ID : </label>
+        <label for="id">Form Name : </label>
         <input type="text" name="id" id="id" value="<?php echo (isset($value)) ? $value : ""; ?>"
-            placeholer="Enter your Name"/>
+            placeholer="Enter your Name" readonly/>
 
         <?php
     }
@@ -64,7 +65,7 @@ Class Form_Data{
     }
 
     function store_form_data_cmb($post_id){
-        
+
         $form_data = $_POST;
         $form_id = get_post_meta($post_id, 'metform_entries__form_id', true);
 
