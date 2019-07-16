@@ -43,7 +43,7 @@ class Widget_My_Form extends Widget_Base {
         echo '<div class="wrapper">'
 		?>
 		<form id="insert_post" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
-			<div style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></div>
+			<p style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></p>
             <input type="text" class="form-control" name="title" id="title"  placeholder="Title">
             <br>
             <input type="number" class="form-control" name="id" id="id"  placeholder="id">

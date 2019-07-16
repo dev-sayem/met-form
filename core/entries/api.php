@@ -13,7 +13,7 @@ Class Api extends \MetForm\Base\Api{
         $form_id = $this->request['id'];
         $form_title = $this->request['title'];
         $form_data = $this->request['data'];
-        print_r($_POST); exit();
+        // print_r($_POST); exit();
         // return $content_key;
         
         //$builder_post_title = 'entries-' . $content_type . '-' . $content_key;
@@ -44,9 +44,6 @@ Class Api extends \MetForm\Base\Api{
             ];
         }
 
-        // $url = get_admin_url() . '/post.php?post='.$builder_post_id.'&action=elementor';
-        // wp_redirect( $url );
-        // exit;
     }
 
     public function get_list(){
