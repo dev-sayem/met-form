@@ -77,6 +77,7 @@ Class Form_Data{
         $this->cpt = new Cpt();
 
         add_action('add_meta_boxes', [$this,'add_form_id_cmb']);
+        //add_action('save_post', [$this,'store_form_id_cmb']);
 
         add_action('add_meta_boxes', [$this,'add_form_data_cmb']);
         add_action('save_post', [$this,'store_form_data_cmb']);

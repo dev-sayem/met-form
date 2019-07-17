@@ -30,20 +30,13 @@ Class Action{
         $this->form_id = $form_id;
         $this->entry_id = $entry_id;
 
-
         if( $this->entry_id == null ){
-            $this->insert();
-            // return [
-            //     'status' => 1,
-            //     'message' => esc_html__('From submitted','metform'),
-            // ];
+            $message = $this->insert();
+            return $message;
         }
         else {
-            $this->update();
-            // return [
-            //     'status' => 1,
-            //     'message' => esc_html__('From updated','metform'),
-            // ];
+            $message = $this->update();
+            return $message;
         }
 
     }
