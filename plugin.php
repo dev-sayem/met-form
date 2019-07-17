@@ -65,7 +65,9 @@ public function modal_view(){
 }
 
 function Include_js_css_public(){
+
     wp_enqueue_script('functions', plugin_dir_url(__FILE__) . 'libs/assets/js/functions.js', array(), '1.0.0', true);
+    
 }
 
 function Include_js_css_admin(){
@@ -75,11 +77,11 @@ function Include_js_css_admin(){
     if($screen->id == 'edit-metform-form'){
 
         wp_enqueue_style('metform-bootstrap', plugin_dir_url(__FILE__). 'libs/assets/css/bootstrap.css', false, '1.0.0');
-        wp_enqueue_style('metform-admin-style', plugin_dir_url(__FILE__). 'libs/assets/css/select2.min.css', false, '1.0.0');
+        //wp_enqueue_style('metform-admin-style', plugin_dir_url(__FILE__). 'libs/assets/css/select2.min.css', false, '1.0.0');
         wp_enqueue_style('metform-admin-style', plugin_dir_url(__FILE__). 'libs/assets/css/admin-style.css', false, '1.0.0');
 
         wp_enqueue_script('metform-bootstrap', plugin_dir_url(__FILE__) . 'libs/assets/js/bootstrap.min.js', array(), '1.0.0', true);
-        wp_enqueue_script('metform-select2', plugin_dir_url(__FILE__) . 'libs/assets/js/select2.min.js', array(), '1.0.0', true);
+        //wp_enqueue_script('metform-select2', plugin_dir_url(__FILE__) . 'libs/assets/js/select2.min.js', array(), '1.0.0', true);
         wp_enqueue_script('metform-admin-script', plugin_dir_url(__FILE__) . 'libs/assets/js/admin-script.js', array(), '1.0.0', true);
         wp_localize_script('metform-admin-script', 'metform_form_url', array( 'siteurl' => get_option('siteurl') ));
     
