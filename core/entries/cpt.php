@@ -50,7 +50,7 @@ Class Cpt extends \MetForm\Base\Cpt {
             'description'           => esc_html__( 'metform-entry', 'met-form' ),
             'labels'                => $labels,
             'supports'              => ['title'],
-            'capabilities'          => ['create_posts' => 'do_not_allow','update_posts' => 'do_not_allow'],
+            'capabilities'          => ['create_posts' => 'do_not_allow'],
             'map_meta_cap'          => true,
             'hierarchical'          => true,
             'public'                => true,
