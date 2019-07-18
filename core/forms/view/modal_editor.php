@@ -15,7 +15,7 @@
 
 				<div class="attr-tab-content">
 					<div role="tabpanel" class="attr-tab-pane attr-active" id="mf-general">
-						<form action="" mathod="get" id="metform-form-modalinput-form" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
+						<form action="" mathod="post" id="metform-form-modalinput-general" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
 							<input type="hidden" name="post_author" value ="<?php echo get_current_user_id(); ?>">
 							<div class="attr-modal-body" id="metform_form_modal_body">
 
@@ -77,7 +77,7 @@
 						</form>
 					</div>
 					<div role="tabpanel" class="attr-tab-pane" id="mf-user-notification">
-						<form action="" mathod="get" id="metform-form-modalinput-form" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
+						<form action="" mathod="get" id="metform-form-modalinput-user-notification" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
 							<input type="hidden" name="post_author" value ="<?php echo get_current_user_id(); ?>">
 							<div class="attr-modal-body" id="metform_form_modal_body">
 
@@ -119,7 +119,7 @@
 						</form>
 					</div>
 					<div role="tabpanel" class="attr-tab-pane" id="mf-admin-notification">
-						<form action="" mathod="get" id="metform-form-modalinput-form" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
+						<form action="" mathod="get" id="metform-form-modalinput-admin-notification" data-open-editor="0" data-editor-url="<?php echo get_admin_url(); ?>">
 							<input type="hidden" name="post_author" value ="<?php echo get_current_user_id(); ?>">
 							<div class="attr-modal-body" id="metform_form_modal_body">
 

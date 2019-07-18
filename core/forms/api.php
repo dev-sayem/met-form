@@ -19,6 +19,30 @@ Class Api extends \MetForm\Base\Api{
 
     }
 
+    public function post_update_general(){
+
+        $data = $this->request->get_params();
+
+        return $data;
+
+    }
+
+    public function post_update_user_notification(){
+
+        $data = $this->request->get_params();
+
+        return $data;
+
+    }
+    
+    public function post_update_admin_notification(){
+
+        $data = $this->request->get_params();
+
+        return $data;
+
+    }
+
     public function get_list(){
 
         $content_id = $this->request['id'];
