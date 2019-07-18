@@ -31,12 +31,12 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Capture Entries :', 'metform'); ?></label>
-									<input type="checkbox" name="capture_entries" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="capture_entries" class="mf-admin-control-input mf-form-modalinput-capture_entries">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Hide Form After Submission :', 'metform'); ?></label>
-									<input type="checkbox" name="hide_form_after_submission" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="hide_form_after_submission" class="mf-admin-control-input mf-form-modalinput-hide_form_after_submission">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -46,7 +46,7 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Required Login :', 'metform'); ?></label>
-									<input type="checkbox" name="require_login" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="require_login" class="mf-admin-control-input mf-form-modalinput-require_login">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -56,23 +56,23 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Multiple Submission :', 'metform'); ?></label>
-									<input type="checkbox" name="multiple_submission" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="multiple_submission" class="mf-admin-control-input mf-form-modalinput-multiple_submission">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Enable Recaptcha :', 'metform'); ?></label>
-									<input type="checkbox" name="enable_recaptcha" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="enable_recaptcha" class="mf-admin-control-input mf-form-modalinput-enable_recaptcha">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Capture User Browser Data :', 'metform'); ?></label>
-									<input type="checkbox" name="capture_user_browser_data" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="capture_user_browser_data" class="mf-admin-control-input mf-form-modalinput-capture_user_browser_data">
 								</div>
 
 							</div>
 							<div class="attr-modal-footer">
-								<button type="button" class="attr-btn attr-btn-default metform-form-save-btn-editor"><?php esc_html_e('Edit content', 'metform'); ?></button>
-								<button type="submit" class="attr-btn attr-btn-primary metform-form-save-btn"><?php esc_html_e('Save changes', 'metform'); ?></button>
+								<button type="button" class="attr-btn attr-btn-default metform-form-general-save-btn-editor"><?php esc_html_e('Edit content', 'metform'); ?></button>
+								<button type="submit" class="attr-btn attr-btn-primary metform-form-general-save-btn"><?php esc_html_e('Save changes', 'metform'); ?></button>
 							</div>
 						</form>
 					</div>
@@ -83,32 +83,32 @@
 
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Enable User Notification :', 'metform'); ?></label>
-									<input type="checkbox" name="enable_user_notification" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="enable_user_notification" class="mf-admin-control-input mf-form-user-enable">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Subject :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_subject" class="mf-form-modalinput attr-form-control">
+									<input type="text" name="user_notification_email_subject" class="mf-form-user-email-subject attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email From :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_from" class="mf-form-modalinput attr-form-control">
+									<input type="text" name="user_notification_email_from" class="mf-form-user-email-from attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Reply To :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_reply_to" class="mf-form-modalinput attr-form-control">
+									<input type="text" name="user_notification_email_reply_to" class="mf-form-user-reply-to attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Body :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_body" class="mf-form-modalinput attr-form-control">
+									<input type="text" name="user_notification_email_body" class="mf-form-user-email-body attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Attached Submission Copy :', 'metform'); ?></label>
-									<input type="checkbox" name="user_notification_email_attach_submission_copy" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="user_notification_email_attach_submission_copy" class="mf-admin-control-input mf-form-user-submission-copy">
 								</div>
 
 							</div>
@@ -125,7 +125,7 @@
 
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Enable Admin Notification :', 'metform'); ?></label>
-									<input type="checkbox" name="enable_admin_notification" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="enable_admin_notification" class="mf-admin-control-input mf-form-modalinput-activition">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -150,7 +150,7 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email Attached Submission Copy :', 'metform'); ?></label>
-									<input type="checkbox" name="admin_notification_email_attach_submission_copy" class="mf-admin-control-input mf-form-modalinput-activition">
+									<input type="checkbox" value="1" name="admin_notification_email_attach_submission_copy" class="mf-admin-control-input mf-form-modalinput-activition">
 								</div>
 
 							</div>

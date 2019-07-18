@@ -33,9 +33,15 @@ Class Api extends \MetForm\Base\Api{
 
     public function post_update_user_notification(){
 
+        $form_id = $this->request['id'];
+
         $data = $this->request->get_params();
 
-        return $data;
+        //return $data;
+
+        $message = Action::instance()->store_user($form_id, $data);
+
+        return $message;
 
     }
 
