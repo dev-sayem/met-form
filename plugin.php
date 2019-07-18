@@ -84,7 +84,7 @@ final class Plugin{
             wp_enqueue_script('metform-bootstrap', plugin_dir_url(__FILE__) . 'libs/assets/js/bootstrap.min.js', array(), '1.0.0', true);
             //wp_enqueue_script('metform-select2', plugin_dir_url(__FILE__) . 'libs/assets/js/select2.min.js', array(), '1.0.0', true);
             wp_enqueue_script('metform-admin-script', plugin_dir_url(__FILE__) . 'libs/assets/js/admin-script.js', array(), '1.0.0', true);
-            wp_localize_script('metform-admin-script', 'metform_form_url', array( 'siteurl' => get_option('siteurl') ));
+            wp_localize_script('metform-admin-script', 'metform_api', array( 'resturl' => get_rest_url() ));
         
         }
     }

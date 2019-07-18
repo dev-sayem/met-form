@@ -26,7 +26,7 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Success Message :', 'metform'); ?></label>
-									<input type="text" name="success_message" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="success_message" class="mf-form-modalinput-success_message attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -41,7 +41,7 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Redirect To :', 'metform'); ?></label>
-									<input type="text" name="redirect_to" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="redirect_to" class="mf-form-modalinput-redirect_to attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -51,7 +51,7 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Limit Total Entries :', 'metform'); ?></label>
-									<input type="number" name="limit_total_entries" class="mf-form-modalinput-title attr-form-control">
+									<input type="number" name="limit_total_entries" class="mf-form-modalinput-limit_total_entries attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -88,22 +88,22 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Subject :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_subject" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="user_notification_email_subject" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email From :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_from" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="user_notification_email_from" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Reply To :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_reply_to" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="user_notification_email_reply_to" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Body :', 'metform'); ?></label>
-									<input type="text" name="user_notification_email_body" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="user_notification_email_body" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
@@ -130,22 +130,22 @@
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email Subject :', 'metform'); ?></label>
-									<input type="text" name="admin_notification_email_subject" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="admin_notification_email_subject" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email From :', 'metform'); ?></label>
-									<input type="text" name="admin_notification_email_from" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="admin_notification_email_from" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email Reply To :', 'metform'); ?></label>
-									<input type="text" name="admin_notification_email_reply_to" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="admin_notification_email_reply_to" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">
 									<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email Body :', 'metform'); ?></label>
-									<input type="text" name="admin_notification_email_body" class="mf-form-modalinput-title attr-form-control">
+									<input type="text" name="admin_notification_email_body" class="mf-form-modalinput attr-form-control">
 								</div>
 								<br>
 								<div class="mf-input-group">

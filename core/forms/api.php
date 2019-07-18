@@ -21,9 +21,13 @@ Class Api extends \MetForm\Base\Api{
 
     public function post_update_general(){
 
-        $data = $this->request->get_params();
+        $form_id = $this->request['id'];
 
-        return $data;
+        $form_data = $this->request->get_params();
+
+        $message = Action::instance()->store_general($form_id,$form_data);
+
+        return $message;
 
     }
 
@@ -34,7 +38,7 @@ Class Api extends \MetForm\Base\Api{
         return $data;
 
     }
-    
+
     public function post_update_admin_notification(){
 
         $data = $this->request->get_params();
@@ -45,8 +49,11 @@ Class Api extends \MetForm\Base\Api{
 
     public function get_list(){
 
-        $content_id = $this->request['id'];
-        return $content_id;
+        $post_id = $this->request['id'];
+
+        $data = Action::instance()->get_all_data($post_id);
+
+        return $data;
 
     }
 
