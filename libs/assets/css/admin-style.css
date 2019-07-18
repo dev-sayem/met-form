@@ -1,10 +1,10 @@
-#metform-template-modalinput-form .attr-modal-content {
+#metform-form-modalinput-form .attr-modal-content {
   -webkit-transition: opaicty .5s ease;
   -o-transition: opaicty .5s ease;
   transition: opaicty .5s ease;
   min-width: 600px;
   position: relative; }
-  #metform-template-modalinput-form .attr-modal-content .mf-spinner {
+  #metform-form-modalinput-form .attr-modal-content .mf-spinner {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,35 +13,35 @@
     transform: translate(-50%, -50%);
     z-index: 6; }
 
-#metform-template-modalinput-form .attr-modal-body {
+#metform-form-modalinput-form .attr-modal-body {
   min-height: 434px;
   max-height: 435px;
   overflow-y: auto;
   overflow-x: hidden; }
 
-#metform-template-modalinput-form .attr-form-control {
+#metform-form-modalinput-form .attr-form-control {
   font-size: 14px;
   height: 50px;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07); }
 
-#metform-template-modalinput-form .attr-input-label {
+#metform-form-modalinput-form .attr-input-label {
   display: inline-block;
   font-weight: 700;
   font-size: 14px; }
   @media (max-width: 767px) {
-    #metform-template-modalinput-form .attr-input-label {
+    #metform-form-modalinput-form .attr-input-label {
       margin-bottom: 10px; } }
   @media (min-width: 768px) {
-    #metform-template-modalinput-form .attr-input-label {
+    #metform-form-modalinput-form .attr-input-label {
       min-width: 30%; } }
 
-#metform-template-modalinput-form .select2-container {
+#metform-form-modalinput-form .select2-container {
   display: block;
   min-width: 70%;
   max-width: 100%; }
-  #metform-template-modalinput-form .select2-container .select2-selection--single,
-  #metform-template-modalinput-form .select2-container .select2-selection--multiple {
+  #metform-form-modalinput-form .select2-container .select2-selection--single,
+  #metform-form-modalinput-form .select2-container .select2-selection--multiple {
     height: 50px;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
@@ -60,25 +60,25 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
-  #metform-template-modalinput-form .select2-container .select2-selection--multiple {
+  #metform-form-modalinput-form .select2-container .select2-selection--multiple {
     height: auto; }
-  #metform-template-modalinput-form .select2-container .selection {
+  #metform-form-modalinput-form .select2-container .selection {
     display: block; }
 
-#metform-template-modalinput-form .select2-container--default .select2-selection--single {
+#metform-form-modalinput-form .select2-container--default .select2-selection--single {
   border-color: #ddd; }
-  #metform-template-modalinput-form .select2-container--default .select2-selection--single .select2-selection__rendered {
+  #metform-form-modalinput-form .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: 1;
     padding-left: 0; }
-  #metform-template-modalinput-form .select2-container--default .select2-selection--single .select2-selection__arrow {
+  #metform-form-modalinput-form .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 100%;
     width: 30px; }
 
-#metform-template-modalinput-form .select2-container--default .select2-selection--multiple {
+#metform-form-modalinput-form .select2-container--default .select2-selection--multiple {
   border-color: #ddd; }
 
 @media (min-width: 768px) {
-  #metform-template-modalinput-form .mf-input-group {
+  #metform-form-modalinput-form .mf-input-group {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -89,7 +89,7 @@
     -ms-flex-pack: justify;
     justify-content: space-between; } }
 
-#metform-template-modalinput-form .mf-switch-group {
+#metform-form-modalinput-form .mf-switch-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

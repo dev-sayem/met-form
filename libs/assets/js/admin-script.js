@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
             id = parent.find('.hidden').attr('id').split('_')[1];
 
             $.get(window.metform_form_url.siteurl + 'forms/get/' + id, function (data) {
-                MetForm_Template_Editor(data);
+                MetForm_Form_Editor(data);
                 modal.removeClass('loading');
             });
         } else {
@@ -25,16 +25,16 @@ jQuery(document).ready(function ($) {
                 condition_singular: 'all',
                 activation: '',
             };
-            MetForm_Template_Editor(data);
+            MetForm_Form_Editor(data);
             modal.removeClass('loading');
         }
 
         modal.find('form').attr('data-mf-id', id);
     });
 
-    $('.mf-template-modalinput-type').on('change', function () {
+    $('.mf-form-modalinput-type').on('change', function () {
         var type = $(this).val();
-        var inputs = $('.mf-template-form-option-container');
+        var inputs = $('.mf-form-form-option-container');
 
         if (type == 'section') {
             inputs.hide();
@@ -44,9 +44,9 @@ jQuery(document).ready(function ($) {
     });
 
 
-    $('.mf-template-modalinput-condition_a').on('change', function () {
+    $('.mf-form-modalinput-condition_a').on('change', function () {
         var condition_a = $(this).val();
-        var inputs = $('.mf-template-modalinput-condition_singular-container');
+        var inputs = $('.mf-form-modalinput-condition_singular-container');
 
         if (condition_a == 'singular') {
             inputs.show();
@@ -55,9 +55,9 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $('.mf-template-modalinput-condition_singular').on('change', function () {
+    $('.mf-form-modalinput-condition_singular').on('change', function () {
         var condition_singular = $(this).val();
-        var inputs = $('.mf-template-modalinput-condition_singular_id-container');
+        var inputs = $('.mf-form-modalinput-condition_singular_id-container');
 
         if (condition_singular == 'selective') {
             inputs.show();
@@ -67,13 +67,13 @@ jQuery(document).ready(function ($) {
     });
 
 
-    $('.metform-template-save-btn-editor').on('click', function () {
-        var form = $('#metform-template-modalinput-form');
+    $('.metform-form-save-btn-editor').on('click', function () {
+        var form = $('#metform-form-modalinput-form');
         form.attr('data-open-editor', '1');
         form.trigger('submit');
     });
 
-    $('#metform-template-modalinput-form').on('submit', function (e) {
+    $('#metform-form-modalinput-form').on('submit', function (e) {
         e.preventDefault();
         var modal = $('#metform-form-modal');
         modal.addClass('loading');
@@ -116,7 +116,7 @@ jQuery(document).ready(function ($) {
 
     });
 
-    // $('.mf-template-modalinput-condition_singular_id').select2({
+    // $('.mf-form-modalinput-condition_singular_id').select2({
     //     ajax: {
     //         url: window.metform_form_url.siteurl + 'ajaxselect2/singular_list',
     //         dataType: 'json',
@@ -133,26 +133,26 @@ jQuery(document).ready(function ($) {
     //     //minimumInputLength: 2,
     // });
 
-    function MetForm_Template_Editor(data) {
+    function MetForm_Form_Editor(data) {
         console.log(data);
         // set the form data
-        $('.mf-template-modalinput-title').val(data.title);
-        $('.mf-template-modalinput-condition_a').val(data.condition_a);
-        $('.mf-template-modalinput-condition_singular').val(data.condition_singular);
-        $('.mf-template-modalinput-condition_singular_id').val(data.condition_singular_id);
-        $('.mf-template-modalinput-type').val(data.type);
+        $('.mf-form-modalinput-title').val(data.title);
+        $('.mf-form-modalinput-condition_a').val(data.condition_a);
+        $('.mf-form-modalinput-condition_singular').val(data.condition_singular);
+        $('.mf-form-modalinput-condition_singular_id').val(data.condition_singular_id);
+        $('.mf-form-modalinput-type').val(data.type);
 
-        var activation_input = $('.mf-template-modalinput-activition');
+        var activation_input = $('.mf-form-modalinput-activition');
         if (data.activation == 'yes') {
             activation_input.attr('checked', true);
         } else {
             activation_input.removeAttr('checked');
         }
 
-        $('.mf-template-modalinput-activition, .mf-template-modalinput-type, .mf-template-modalinput-condition_a, .mf-template-modalinput-condition_singular')
+        $('.mf-form-modalinput-activition, .mf-form-modalinput-type, .mf-form-modalinput-condition_a, .mf-form-modalinput-condition_singular')
             .trigger('change');
 
-        var el = $('.mf-template-modalinput-condition_singular_id');
+        var el = $('.mf-form-modalinput-condition_singular_id');
 //         $.ajax({
 //             url: metform_form_url.siteurl + 'ajaxselect2/singular_list',
 //             dataType: 'json',
