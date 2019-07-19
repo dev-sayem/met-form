@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
 
     $('.row-actions .edit a, .page-title-action, .metform-form-edit-btn').on('click', function (e) {
         e.preventDefault();
-        console.log($(this));
+        //console.log($(this));
         var id = 0;
         var modal = $('#metform_form_modal');
         var parent = $(this).parents('.column-title');
@@ -13,22 +13,18 @@ jQuery(document).ready(function ($) {
         modal.modal('show');
         if (parent.length > 0) {
             id = $(this).attr('data-metform-form-id');
-            console.log(id);
+            //console.log(id);
             id = (id !== undefined) ? id : parent.find('.hidden').attr('id').split('_')[1];
 
 
             $.get(window.metform_api.resturl + 'metform/v1/forms/get/' + id, function (data) {
-                console.log(data);
+                //console.log(data);
                 MetForm_Form_Editor(data);
                 modal.removeClass('loading');
             });
         } else {
             var data = {
-                title: '',
-                type: 'header',
-                condition_a: 'entire_site',
-                condition_singular: 'all',
-                activation: '',
+                form_title: '',
             };
             MetForm_Form_Editor(data);
             modal.removeClass('loading');
@@ -49,7 +45,7 @@ jQuery(document).ready(function ($) {
         modal.addClass('loading');
 
         var form_data = $(this).serialize();
-        console.log("submitted data : "+form_data);
+        //console.log("submitted data : "+form_data);
         var id = $(this).attr('data-mf-id');
         var open_editor = $(this).attr('data-open-editor');
         var admin_url = $(this).attr('data-editor-url');

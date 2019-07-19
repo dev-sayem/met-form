@@ -62,6 +62,14 @@ Class Action{
 
     public function update(){
 
+        if(isset($this->form_data['form_title'])){
+            $update_post = array(
+                'ID'           => $this->form_id,
+                'post_title'   => $this->form_data['form_title'],
+            );
+            wp_update_post( $update_post );
+        }
+
         update_post_meta($this->form_id, $this->key_form_data, $this->form_data);
         
         return [
