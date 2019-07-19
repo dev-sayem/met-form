@@ -1,4 +1,5 @@
 <?php
+
 namespace MetForm\Core\Forms;
 
 Class Action{
@@ -20,10 +21,10 @@ Class Action{
 
     }
 
-    public function store($form_id, $form_data){
+    public function store( $form_id, $form_data ){
 
         $this->fields = $this->get_fields();
-        $this->sanitize($form_data);
+        $this->sanitize( $form_data );
         $this->form_id = $form_id;
 
         if($this->form_id == 0){
@@ -38,16 +39,16 @@ Class Action{
                 
     public function insert(){
 
-        $this->title = isset($this->form_data['form_title']) ? $this->form_data['form_title'] : 'Metform # '.time();
+        $this->title = isset( $this->form_data['form_title']) ? $this->form_data['form_title'] : 'Metform # '.time();
 
         $defaults = array(
             'post_title' => $this->title,
             'post_status' => 'publish',
             'post_type' => $this->post_type,
         );
-        $this->form_id = wp_insert_post($defaults);
+        $this->form_id = wp_insert_post( $defaults );
 
-        update_post_meta($this->form_id, $this->key_form_data, $this->form_data);
+        update_post_meta( $this->form_id, $this->key_form_data, $this->form_data );
                 
         return [
             'saved' => true,
@@ -62,7 +63,7 @@ Class Action{
 
     public function update(){
 
-        if(isset($this->form_data['form_title'])){
+        if( isset( $this->form_data['form_title'] ) ){
             $update_post = array(
                 'ID'           => $this->form_id,
                 'post_title'   => $this->form_data['form_title'],
@@ -70,7 +71,7 @@ Class Action{
             wp_update_post( $update_post );
         }
 
-        update_post_meta($this->form_id, $this->key_form_data, $this->form_data);
+        update_post_meta( $this->form_id, $this->key_form_data, $this->form_data );
         
         return [
             'saved' => true,
@@ -156,13 +157,13 @@ Class Action{
         ];
     }
 
-    public function sanitize($form_data, $fields = null){
-        if($fields == null){
+    public function sanitize( $form_data, $fields = null ){
+        if( $fields == null ){
             $fields = $this->fields;
         }
-        foreach( $form_data as $key => $value){
+        foreach( $form_data as $key => $value ){
 
-            if(isset($fields[$key])){
+            if( isset( $fields[$key] ) ){
                 $this->form_data[ $key ] = $value;
             }
 
@@ -170,18 +171,18 @@ Class Action{
     }
 
 
-    public function get_all_data($post_id){
+    public function get_all_data( $post_id ){
 
-        $post = get_post($post_id);
+        $post = get_post( $post_id );
 
-        $data = get_post_meta($post->ID, $this->key_form_data,  true);
+        $data = get_post_meta( $post->ID, $this->key_form_data,  true );
 
         return $data;   
 
     }
 
     public static function instance(){
-        if (!self::$instance){
+        if ( !self::$instance ){
             self::$instance = new self();
         }
         return self::$instance;
