@@ -11,55 +11,27 @@ Class Api extends \MetForm\Base\Api{
         $this->param  = "/(?P<id>\d+)";
     }
 
-    public function post_insert(){
-
-        $data = $this->request;
-
-        return $data;
-
-    }
-
-    public function post_update_general(){
+    public function post_update(){
 
         $form_id = $this->request['id'];
 
         $form_data = $this->request->get_params();
 
-        $message = Action::instance()->store_general($form_id,$form_data);
+        $message = Action::instance()->store($form_id,$form_data);
 
         return $message;
 
     }
 
-    public function post_update_user_notification(){
-
-        $form_id = $this->request['id'];
-
-        $data = $this->request->get_params();
-
-        //return $data;
-
-        $message = Action::instance()->store_user($form_id, $data);
-
-        return $message;
-
-    }
-
-    public function post_update_admin_notification(){
-
-        $data = $this->request->get_params();
-
-        return $data;
-
-    }
-
-    public function get_list(){
+    public function get_get(){
 
         $post_id = $this->request['id'];
 
-        $data = Action::instance()->get_all_data($post_id);
+        return $post_id;
 
-        return $data;
+        // $data = Action::instance()->get_all_data($post_id);
+
+        // return $data;
 
     }
 
