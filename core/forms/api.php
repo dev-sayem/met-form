@@ -17,9 +17,7 @@ Class Api extends \MetForm\Base\Api{
 
         $form_data = $this->request->get_params();
 
-        $message = Action::instance()->store($form_id,$form_data);
-
-        return $message;
+        return Action::instance()->store($form_id,$form_data);
 
     }
 
@@ -27,11 +25,7 @@ Class Api extends \MetForm\Base\Api{
 
         $post_id = $this->request['id'];
 
-        return $post_id;
-
-        // $data = Action::instance()->get_all_data($post_id);
-
-        // return $data;
+        return Action::instance()->get_all_data($post_id);
 
     }
 

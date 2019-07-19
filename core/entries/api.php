@@ -15,13 +15,12 @@ Class Api extends \MetForm\Base\Api{
 
         $form_data = $this->request->get_params();
 
-        $message = Action::instance()->store($form_id, $form_data);
-
-        return $message;
+        return Action::instance()->store($form_id, $form_data);
 
     }
 
     public function get_list(){
+        
         $content_id = $this->request['id'];
         $content_key = $this->request['key'];
         $content_type = $this->request['type'];

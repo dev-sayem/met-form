@@ -13,6 +13,7 @@ jQuery(document).ready(function ($) {
             id = parent.find('.hidden').attr('id').split('_')[1];
 
             $.get(window.metform_api.resturl + 'metform/v1/forms/get/' + id, function (data) {
+                console.log(data);
                 MetForm_Form_Editor(data);
                 modal.removeClass('loading');
             });
@@ -49,26 +50,16 @@ jQuery(document).ready(function ($) {
         var admin_url = $(this).attr('data-editor-url');
 
         $.post(window.metform_api.resturl + 'metform/v1/forms/update/' + id, form_data, function (output) {
-            console.log('update rest hit : '+output.title);
+
+            $('#message').css('display','block');
+            $('#message').html(output.status);
+            setTimeout( function(){ 
+                $('#message').css('display','none');
+            }  , 1500 );
+            
+            //console.log(output.status);
+
             modal.removeClass('loading');
-
-            // set list table data
-            // var row = $('#post-' + output.data.id);
-            // console.log(row.length);
-
-            // if(row.length > 0){
-            //     row.find('.column-type')
-            //         .html(output.data.type_html);
-
-            //     row.find('.column-condition')
-            //         .html(output.data.cond_text);
-
-            //     row.find('.row-title')
-            //         .html(output.data.title)
-            //         .attr('aria-label', output.data.title);
-
-            //     console.log(output.data.title);
-            // }
 
             if (open_editor == '1') {
                 window.location.href = admin_url + '?post=' + output.data.id + '&action=elementor';
@@ -79,112 +70,14 @@ jQuery(document).ready(function ($) {
 
     });
 
-    // $('.metform-form-save-btn-editor').on('click', function () {
-    //     var form = $('#metform-form-modalinput-form');
-    //     form.attr('data-open-editor', '1');
-    //     form.trigger('submit');
-    // });
-
-    // $('#metform-form-modalinput-user-notification').on('submit', function (e) {
-    //     e.preventDefault();
-    //     var modal = $('#metform-form-modal');
-    //     modal.addClass('loading');
-
-    //     var form_data = $(this).serialize();
-    //     console.log("user input data : "+form_data);
-    //     var id = $(this).attr('data-mf-id');
-    //     console.log("user input id : "+id);
-    //     var open_editor = $(this).attr('data-open-editor');
-    //     var admin_url = $(this).attr('data-editor-url');
-
-
-    //     $.post(window.metform_api.resturl + 'metform/v1/forms/update_user_notification/' + id, form_data, function (output) {
-    //         console.log("response : "+output.data.id);
-    //         modal.removeClass('loading');
-
-    //         // set list table data
-    //         var row = $('#post-' + output.data.id);
-    //         console.log(row.length);
-
-    //         if(row.length > 0){
-    //             row.find('.column-type')
-    //                 .html(output.data.type_html);
-
-    //             row.find('.column-condition')
-    //                 .html(output.data.cond_text);
-
-    //             row.find('.row-title')
-    //                 .html(output.data.title)
-    //                 .attr('aria-label', output.data.title);
-
-    //             console.log(output.data.title);
-    //         }
-
-    //         if (open_editor == '1') {
-    //             window.location.href = admin_url + '?post=' + output.data.id + '&action=elementor';
-    //         }else if(id == '0'){
-    //             location.reload();
-    //         }
-
-    //     });
-
-    // });
-
-    // $('#metform-form-modalinput-admin-notification').on('submit', function (e) {
-    //     e.preventDefault();
-    //     var modal = $('#metform-form-modal');
-    //     modal.addClass('loading');
-
-    //     var form_data = $(this).serialize();
-    //     var id = $(this).attr('data-mf-id');
-    //     var open_editor = $(this).attr('data-open-editor');
-    //     var admin_url = $(this).attr('data-editor-url');
-
-    //     //console.log(form_data);
-
-    //     $.post(window.metform_api.resturl + 'metform/v1/forms/update_admin_notification/' + id, form_data, function (output) {
-
-    //         console.log("response : "+output.data.id);
-    //         modal.removeClass('loading');
-
-    //         // set list table data
-    //         var row = $('#post-' + output.data.id);
-    //         console.log(row.length);
-
-    //         if(row.length > 0){
-    //             row.find('.column-type')
-    //                 .html(output.data.type_html);
-
-    //             row.find('.column-condition')
-    //                 .html(output.data.cond_text);
-
-    //             row.find('.row-title')
-    //                 .html(output.data.title)
-    //                 .attr('aria-label', output.data.title);
-
-    //             console.log(output.data.title);
-    //         }
-
-    //         if (open_editor == '1') {
-    //             window.location.href = admin_url + '?post=' + output.data.id + '&action=elementor';
-    //         }else if(id == '0'){
-    //             location.reload();
-    //         }
-
-    //     });
-
-    // });
-
-
     function MetForm_Form_Editor(data) {
 
-        console.log(data);
-        
-        $('.mf-form-modalinput-title').val(data.title);
+        //console.log(data);
+
+        $('.mf-form-modalinput-title').val(data.form_title);
         $('.mf-form-modalinput-success_message').val(data.success_message);
         $('.mf-form-modalinput-redirect_to').val(data.redirect_to);
         $('.mf-form-modalinput-limit_total_entries').val(data.limit_total_entries);
-        $('.mf-form-modalinput-type').val(data.type);
 
         var capture_entries = $('.mf-form-modalinput-capture_entries');
         if (data.capture_entries == '1') {
@@ -224,13 +117,12 @@ jQuery(document).ready(function ($) {
         }
 
 
-        $('.mf-form-user-email-subject').val(data.user_notification_email_subject);
-        $('.mf-form-user-email-from').val(data.user_notification_email_from);
-        $('.mf-form-user-reply-to').val(data.user_notification_email_reply_to);
-        $('.mf-form-user-email-body').val(data.user_notification_email_body);
+        $('.mf-form-user-email-subject').val(data.user_email_subject);
+        $('.mf-form-user-email-from').val(data.user_email_from);
+        $('.mf-form-user-reply-to').val(data.user_email_reply_to);
+        $('.mf-form-user-email-body').val(data.user_email_body);
 
-        //console.log("notification : "+data.enable_user_notification);
-
+    
         var enable_user_notification = $('.mf-form-user-enable')
         if(data.enable_user_notification == '1'){
             enable_user_notification.attr('checked', true);
@@ -240,19 +132,18 @@ jQuery(document).ready(function ($) {
         }
 
         var user_submission_copy = $('.mf-form-user-submission-copy')
-        if(data.user_notification_email_attach_submission_copy == '1'){
+        if(data.user_email_attach_submission_copy == '1'){
             user_submission_copy.attr('checked', true);
         }
         else{
             user_submission_copy.removeAttr('checked');
         }
 
-        $('.mf-form-admin-email-subject').val(data.admin_notification_email_subject);
-        $('.mf-form-admin-email-from').val(data.admin_notification_email_from);
-        $('.mf-form-admin-reply-to').val(data.admin_notification_email_reply_to);
-        $('.mf-form-admin-email-body').val(data.admin_notification_email_body);
+        $('.mf-form-admin-email-subject').val(data.admin_email_subject);
+        $('.mf-form-admin-email-from').val(data.admin_email_from);
+        $('.mf-form-admin-reply-to').val(data.admin_email_reply_to);
+        $('.mf-form-admin-email-body').val(data.admin_email_body);
 
-        //console.log("notification : "+data.admin_notification_email_attach_submission_copy);
 
         var enable_admin_notification = $('.mf-form-admin-enable')
         if(data.enable_admin_notification == '1'){
@@ -263,15 +154,12 @@ jQuery(document).ready(function ($) {
         }
 
         var admin_submission_copy = $('.mf-form-admin-submission-copy')
-        if(data.admin_notification_email_attach_submission_copy == '1'){
+        if(data.admin_email_attach_submission_copy == '1'){
             admin_submission_copy.attr('checked', true);
         }
         else{
             admin_submission_copy.removeAttr('checked');
         }
-
-        // $('.mf-form-modalinput-activition, .mf-form-modalinput-type, .mf-form-modalinput-condition_a, .mf-form-modalinput-condition_singular')
-        //     .trigger('change');
 
     }
 

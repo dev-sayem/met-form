@@ -15,7 +15,7 @@ Class Action{
 
     public function __construct()
     {
-            $this->key_form_data = 'metform_form__form_data';
+            $this->key_form_data = 'metform_form__form_setting';
             $this->post_type = Init::instance()->form->get_name();
 
     }
@@ -37,8 +37,9 @@ Class Action{
     }
                 
     public function insert(){
-        
-        $this->title = isset($this->form_data['title']) ? $this->form_data['title'] : 'Metform # '.time();
+
+        $this->title = isset($this->form_data['form_title']) ? $this->form_data['form_title'] : 'Metform # '.time();
+
         $defaults = array(
             'post_title' => $this->title,
             'post_status' => 'publish',
@@ -50,6 +51,7 @@ Class Action{
                 
         return [
             'saved' => true,
+            'status' => "Form settings inserted",
             'data' => [
                 'id' => $this->form_id,
                 'title' => $this->title,
@@ -64,6 +66,7 @@ Class Action{
         
         return [
             'saved' => true,
+            'status' => 'Form settings updated',
             'data' => [
                 'id' => $this->form_id,
                 'title' => $this->title,
@@ -76,8 +79,8 @@ Class Action{
 
         return [
         
-            'title' => [ 
-                'name' => 'title',
+            'form_title' => [ 
+                'name' => 'form_title',
             ],
             'success_message' => [ 
                 'name' => 'success_message',
@@ -109,38 +112,38 @@ Class Action{
             'enable_user_notification' => [
                 'name' => 'enable_user_notification',
             ],
-            'user_notification_email_subject' => [
-                'name' => 'user_notification_email_subject',
+            'user_email_subject' => [
+                'name' => 'user_email_subject',
             ],
-            'user_notification_email_from' => [
-                'name' => 'user_notification_email_from',
+            'user_email_from' => [
+                'name' => 'user_email_from',
             ],
-            'user_notification_email_reply_to' => [
-                'name' => 'user_notification_email_reply_to',
+            'user_email_reply_to' => [
+                'name' => 'user_email_reply_to',
             ],
-            'user_notification_email_body' => [
-                'name' => 'user_notification_email_body',
+            'user_email_body' => [
+                'name' => 'user_email_body',
             ],
-            'user_notification_email_attach_submission_copy' => [
-                'name' => 'user_notification_email_attach_submission_copy',
+            'user_email_attach_submission_copy' => [
+                'name' => 'user_email_attach_submission_copy',
             ],
             'enable_admin_notification' => [
                 'name' => 'enable_admin_notification',
             ],
-            'admin_notification_email_subject' => [
-                'name' => 'admin_notification_email_subject',
+            'admin_email_subject' => [
+                'name' => 'admin_email_subject',
             ],
-            'admin_notification_email_from' => [
-                'name' => 'admin_notification_email_from',
+            'admin_email_from' => [
+                'name' => 'admin_email_from',
             ],
-            'admin_notification_email_reply_to' => [
-                'name' => 'admin_notification_email_reply_to',
+            'admin_email_reply_to' => [
+                'name' => 'admin_email_reply_to',
             ],
-            'admin_notification_email_body' => [
-                'name' => 'admin_notification_email_body',
+            'admin_email_body' => [
+                'name' => 'admin_email_body',
             ],
-            'admin_notification_email_attach_submission_copy' => [
-                'name' => 'admin_notification_email_attach_submission_copy',
+            'admin_email_attach_submission_copy' => [
+                'name' => 'admin_email_attach_submission_copy',
             ],
         ];
     }
@@ -163,38 +166,9 @@ Class Action{
 
         $post = get_post($post_id);
 
-        if($post != null){
+        $data = get_post_meta($post->ID, $this->key_form_data,  true);
 
-            return [
-                
-                'title' => $post->post_title,
-                'success_message' => get_post_meta($post->ID, $this->key_form_general.'_success_message',  true),
-                'capture_entries' => get_post_meta($post->ID, $this->key_form_general.'_capture_entries', true),
-                'hide_form_after_submission' => get_post_meta($post->ID, $this->key_form_general.'_hide_form_after_submission', true),
-                'redirect_to' => get_post_meta($post->ID, $this->key_form_general.'_redirect_to', true),
-                'require_login' => get_post_meta($post->ID, $this->key_form_general.'_require_login', true),
-                'limit_total_entries' => get_post_meta($post->ID, $this->key_form_general.'_limit_total_entries', true),
-                'multiple_submission' => get_post_meta($post->ID, $this->key_form_general.'_multiple_submission', true),
-                'enable_recaptcha' => get_post_meta($post->ID, $this->key_form_general.'_enable_recaptcha', true),
-                'capture_user_browser_data' => get_post_meta($post->ID, $this->key_form_general.'_capture_user_browser_data', true),
-
-                'enable_user_notification' => get_post_meta($post->ID, $this->key_form_user.'_enable_notification', true),
-                'user_notification_email_subject' => get_post_meta($post->ID, $this->key_form_user.'_notification_email_subject', true),
-                'user_notification_email_from' => get_post_meta($post->ID, $this->key_form_user.'_notification_email_from', true),
-                'user_notification_email_reply_to' => get_post_meta($post->ID, $this->key_form_user.'_notification_email_reply_to', true),
-                'user_notification_email_body' => get_post_meta($post->ID, $this->key_form_user.'_notification_email_body', true),
-                'user_notification_email_attach_submission_copy' => get_post_meta($post->ID, $this->key_form_user.'_notification_email_attach_submission_copy', true),
-                
-                'enable_admin_notification' => get_post_meta($post->ID, $this->key_form_admin.'_enable_notification', true),
-                'admin_notification_email_subject' => get_post_meta($post->ID, $this->key_form_admin.'_notification_email_subject', true),
-                'admin_notification_email_from' => get_post_meta($post->ID, $this->key_form_admin.'_notification_email_from', true),
-                'admin_notification_email_reply_to' => get_post_meta($post->ID, $this->key_form_admin.'_notification_email_reply_to', true),
-                'admin_notification_email_body' => get_post_meta($post->ID, $this->key_form_admin.'_notification_email_body', true),
-                'admin_notification_email_attach_submission_copy' => get_post_meta($post->ID, $this->key_form_admin.'_notification_email_attach_submission_copy', true),
-                
-            ];
-
-        } 
+        return $data;   
 
     }
 
