@@ -11,14 +11,14 @@ Class Cpt extends \MetForm\Base\Cpt {
     public function post_type()
     {
         $labels = array(
-            'name'                  => _x( 'Form entries', 'Post Type General Name', 'met-form' ),
-            'singular_name'         => _x( 'Form entry', 'Post Type Singular Name', 'met-form' ),
-            'menu_name'             => esc_html__( 'Form Entry', 'met-form' ),
-            'name_admin_bar'        => esc_html__( 'Form Entry', 'met-form' ),
+            'name'                  => _x( 'Entries', 'Post Type General Name', 'met-form' ),
+            'singular_name'         => _x( 'Entry', 'Post Type Singular Name', 'met-form' ),
+            'menu_name'             => esc_html__( 'Entry', 'met-form' ),
+            'name_admin_bar'        => esc_html__( 'Entry', 'met-form' ),
             'archives'              => esc_html__( 'Entry Archives', 'met-form' ),
             'attributes'            => esc_html__( 'Entry Attributes', 'met-form' ),
             'parent_item_colon'     => esc_html__( 'Parent Item:', 'met-form' ),
-            'all_items'             => esc_html__( 'Form Entries', 'met-form' ),
+            'all_items'             => esc_html__( 'Entries', 'met-form' ),
             'add_new_item'          => esc_html__( 'Add New Item', 'met-form' ),
             'add_new'               => esc_html__( 'Add New', 'met-form' ),
             'new_item'              => esc_html__( 'New Item', 'met-form' ),

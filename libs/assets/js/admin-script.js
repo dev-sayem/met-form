@@ -1,8 +1,10 @@
+//console.log('loaded');
 jQuery(document).ready(function ($) {
     "use strict"; 
 
-    $('.row-actions .edit a, .page-title-action').on('click', function (e) {
+    $('.row-actions .edit a, .page-title-action, .metform-form-edit-btn').on('click', function (e) {
         e.preventDefault();
+        console.log($(this));
         var id = 0;
         var modal = $('#metform_form_modal');
         var parent = $(this).parents('.column-title');
@@ -10,7 +12,10 @@ jQuery(document).ready(function ($) {
         modal.addClass('loading');
         modal.modal('show');
         if (parent.length > 0) {
-            id = parent.find('.hidden').attr('id').split('_')[1];
+            id = $(this).attr('data-metform-form-id');
+            console.log(id);
+            id = (id !== undefined) ? id : parent.find('.hidden').attr('id').split('_')[1];
+
 
             $.get(window.metform_api.resturl + 'metform/v1/forms/get/' + id, function (data) {
                 console.log(data);
@@ -33,7 +38,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('.metform-form-save-btn-editor').on('click', function () {
-        var form = $('#metform-form-modalinput-seetings');
+        var form = $('#metform-form-modalinput-settings');
         form.attr('data-open-editor', '1');
         form.trigger('submit');
     });
