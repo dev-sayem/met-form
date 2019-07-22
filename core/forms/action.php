@@ -106,6 +106,9 @@ Class Action{
             'require_login' => [
                 'name' => 'require_login',
             ],
+            'limit_total_entries_status' => [
+                'name' => 'limit_total_entries_status',
+            ],
             'limit_total_entries' => [
                 'name' => 'limit_total_entries',
             ],

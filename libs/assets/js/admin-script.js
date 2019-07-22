@@ -71,6 +71,17 @@ jQuery(document).ready(function ($) {
 
     });
 
+    $('input.mf-form-modalinput-limit_status').click(function(){
+        if($(this).is(":checked")){
+            $('#limit_status').removeClass('hide_input');
+            $('#limit_status').addClass('show_input');
+        }
+        else if($(this).is(":not(:checked)")){
+            $('#limit_status').removeClass('show_input');
+            $('#limit_status').addClass('hide_input');
+        }
+    });
+
     function MetForm_Form_Editor(data) {
 
         //console.log(data);
@@ -86,30 +97,43 @@ jQuery(document).ready(function ($) {
         } else {
             capture_entries.removeAttr('checked');
         }
+
         var hide_form_after_submission = $('.mf-form-modalinput-hide_form_after_submission');
         if (data.hide_form_after_submission == '1') {
             hide_form_after_submission.attr('checked', true);
         } else {
             hide_form_after_submission.removeAttr('checked');
         }
+
         var require_login = $('.mf-form-modalinput-require_login');
         if (data.require_login == '1') {
             require_login.attr('checked', true);
         } else {
             require_login.removeAttr('checked');
         }
+        var limit_entry_status = $('.mf-form-modalinput-limit_status');
+        if (data.limit_total_entries_status == '1') {
+            limit_entry_status.attr('checked', true);
+            $('#limit_status').removeClass('hide_input');
+            $('#limit_status').addClass('show_input');
+        } else {
+            limit_entry_status.removeAttr('checked');
+        }
+
         var multiple_submission = $('.mf-form-modalinput-multiple_submission');
         if (data.multiple_submission == '1') {
             multiple_submission.attr('checked', true);
         } else {
             multiple_submission.removeAttr('checked');
         }
+
         var enable_recaptcha = $('.mf-form-modalinput-enable_recaptcha');
         if (data.enable_recaptcha == '1') {
             enable_recaptcha.attr('checked', true);
         } else {
             enable_recaptcha.removeAttr('checked');
         }
+
         var capture_user_browser_data = $('.mf-form-modalinput-capture_user_browser_data');
         if (data.capture_user_browser_data == '1') {
             capture_user_browser_data.attr('checked', true);

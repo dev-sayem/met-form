@@ -52,6 +52,10 @@
 							<br>
 							<div class="mf-input-group">
 								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Limit Total Entries :', 'metform'); ?></label>
+								<input type="checkbox" value="1" name="limit_total_entries_status" class="mf-admin-control-input mf-form-modalinput-limit_status">
+							</div>
+							<div class="mf-input-group hide_input" id='limit_status'>
+								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Enter Limit Number :', 'metform'); ?></label>
 								<input type="number" name="limit_total_entries" class="mf-form-modalinput-limit_total_entries attr-form-control">
 							</div>
 							<br>

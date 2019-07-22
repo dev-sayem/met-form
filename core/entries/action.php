@@ -69,8 +69,8 @@ Class Action{
         if(!$user_mail){
             $this->message['user'] = 'user mail not found';
         }else{
-            $header [] = $from;
-            $header [] = $reply_to;
+            $header [] = 'From : '.$from;
+            $header [] = 'Reply to : '.$reply_to;
             $status = wp_mail($user_mail, $subject, $body, $header);
 
             if($status){
@@ -78,14 +78,14 @@ Class Action{
             }
         }
         $this->message['user'] = 'come to user mail function';
-        
+
     }
     public function send_admin_email($subject, $from, $reply_to, $body, $attached_submission){
 
         $admin_email = get_option('admin_email', false);
 
-        $header [] = $from;
-        $header [] = $reply_to;
+        $header [] = 'From : '.$from;
+        $header [] = 'Reply to : '.$reply_to;
 
         $status = wp_mail($admin_email, $subject, $body, $header);
 
@@ -164,19 +164,11 @@ Class Action{
         $this->message['message'] = esc_html__($this->form_settings['success_message'],'metform');
         $this->message['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
         $this->message['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
-
-        //return $this->message;
-
-        // return [
-        //     'status' => 1,
-        //     'message' => esc_html__($this->form_settings['success_message'],'metform'),
-        //     'hide_form' => esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform'),
-        //     'redirect_to' => esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform'),
-        // ];
         
     }
     
     private function update(){
+        
         update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
@@ -185,14 +177,6 @@ Class Action{
         $this->message['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
         $this->message['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
 
-        //return $this->message;
-        
-        // return [
-        //     'status' => 1,
-        //     'message' => esc_html__($this->form_settings['success_message'],'metform'),
-        //     'hide_form' => esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform'),
-        //     'redirect_to' => esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform'),
-        // ];
     }
 
     public static function instance(){

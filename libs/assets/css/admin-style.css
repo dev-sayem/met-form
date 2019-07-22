@@ -168,3 +168,10 @@
   .attr-modal {
     z-index: 99999;
   }
+
+  #metform-form-modalinput-form .mf-input-group.hide_input{
+    display: none;
+  }
+  #metform-form-modalinput-form .mf-input-group.show_input{
+    display: flex;
+  }
