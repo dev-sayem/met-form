@@ -15,7 +15,9 @@ Class Api extends \MetForm\Base\Api{
 
         $form_data = $this->request->get_params();
 
-        return Action::instance()->store($form_id, $form_data);
+        //return $form_settings;
+
+        return Action::instance()->check_settings($form_id, $form_data);
 
     }
 

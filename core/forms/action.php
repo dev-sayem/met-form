@@ -6,25 +6,25 @@ Class Action{
 
     public static $instance;
 
-    private $key_form_data;
+    private $key_form_settings;
     private $post_type;
 
     private $fields;
     private $form_id;
-    private $form_data;
+    private $form_setting;
     private $title;
 
     public function __construct()
     {
-            $this->key_form_data = 'metform_form__form_setting';
+            $this->key_form_settings = 'metform_form__form_setting';
             $this->post_type = Init::instance()->form->get_name();
 
     }
 
-    public function store( $form_id, $form_data ){
+    public function store( $form_id, $form_setting ){
 
         $this->fields = $this->get_fields();
-        $this->sanitize( $form_data );
+        $this->sanitize( $form_setting );
         $this->form_id = $form_id;
 
         if($this->form_id == 0){
@@ -39,7 +39,7 @@ Class Action{
                 
     public function insert(){
 
-        $this->title = isset( $this->form_data['form_title']) ? $this->form_data['form_title'] : 'Metform # '.time();
+        $this->title = isset( $this->form_setting['form_title']) ? $this->form_setting['form_title'] : 'Metform # '.time();
 
         $defaults = array(
             'post_title' => $this->title,
@@ -48,7 +48,7 @@ Class Action{
         );
         $this->form_id = wp_insert_post( $defaults );
 
-        update_post_meta( $this->form_id, $this->key_form_data, $this->form_data );
+        update_post_meta( $this->form_id, $this->key_form_settings, $this->form_setting );
                 
         return [
             'saved' => true,
@@ -63,15 +63,15 @@ Class Action{
 
     public function update(){
 
-        if( isset( $this->form_data['form_title'] ) ){
+        if( isset( $this->form_setting['form_title'] ) ){
             $update_post = array(
                 'ID'           => $this->form_id,
-                'post_title'   => $this->form_data['form_title'],
+                'post_title'   => $this->form_setting['form_title'],
             );
             wp_update_post( $update_post );
         }
 
-        update_post_meta( $this->form_id, $this->key_form_data, $this->form_data );
+        update_post_meta( $this->form_id, $this->key_form_settings, $this->form_setting );
         
         return [
             'saved' => true,
@@ -157,14 +157,14 @@ Class Action{
         ];
     }
 
-    public function sanitize( $form_data, $fields = null ){
+    public function sanitize( $form_setting, $fields = null ){
         if( $fields == null ){
             $fields = $this->fields;
         }
-        foreach( $form_data as $key => $value ){
+        foreach( $form_setting as $key => $value ){
 
             if( isset( $fields[$key] ) ){
-                $this->form_data[ $key ] = $value;
+                $this->form_setting[ $key ] = $value;
             }
 
         }
@@ -175,7 +175,7 @@ Class Action{
 
         $post = get_post( $post_id );
 
-        $data = get_post_meta( $post->ID, $this->key_form_data,  true );
+        $data = get_post_meta( $post->ID, $this->key_form_settings,  true );
 
         return $data;   
 
