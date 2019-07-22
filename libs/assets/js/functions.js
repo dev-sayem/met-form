@@ -9,6 +9,7 @@ jQuery(document).ready(function($) {
             console.log("Response : "+data);
             console.log("Response(user mail) : "+data['user']);
             console.log("Response(admin mail) : "+data['admin']);
+            console.log("Response(entry count) : "+data['entry_count']);
             //console.log("status : "+data['status']+" msg : "+data['message']);
             var status = Number(data['status']);
             if (status == 1) {

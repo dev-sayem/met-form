@@ -22,3 +22,6 @@ function metform(){
 }
 
 add_action( 'plugins_loaded', 'metform' );
+
+// $data = get_post_meta(150, 'metform_form__form_total_entries', true);
+// var_dump($data);

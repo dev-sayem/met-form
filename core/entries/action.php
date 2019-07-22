@@ -9,6 +9,7 @@ Class Action{
     private $key_form_id;
     private $key_form_data;
     private $key_form_settings;
+    private $key_form_total_entries;
     private $post_type;
 
     private $fields;
@@ -23,6 +24,7 @@ Class Action{
     public function __construct()
     {
         $this->key_form_settings = 'metform_form__form_setting';
+        $this->key_form_total_entries = 'metform_form__form_total_entries';
         $this->key_form_id = 'metform_entries__form_id';
         $this->key_form_data = 'metform_entries__form_data';
         $this->post_type = Init::instance()->cpt->get_name();
@@ -30,10 +32,12 @@ Class Action{
 
     public function check_settings($form_id, $form_data){
 
+        $this->form_id = $form_id;
+
         $this->form_settings = get_post_meta($form_id, $this->key_form_settings, true);
 
         if(isset($this->form_settings['capture_entries']) && $this->form_settings['capture_entries'] == 1){
-            $this->store($form_id, $form_data);
+            $this->store($this->form_id, $form_data);
         }
 
         if(isset($this->form_settings['enable_user_notification']) && $this->form_settings['enable_user_notification'] == 1){
@@ -100,7 +104,6 @@ Class Action{
         
         $this->fields = $this->get_fields();
         $this->sanitize($form_data);
-        $this->form_id = $form_id;
         $this->entry_id = $entry_id;
 
         if( $this->entry_id == null ){
@@ -156,11 +159,25 @@ Class Action{
         );
         $this->entry_id = wp_insert_post($defaults);
 
-        update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
-        update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
+        $entry_count = get_post_meta($this->form_id, $this->key_form_total_entries, true);
+        $entry_count = ($entry_count == '') ? 1 : ((int)$entry_count);
 
+        if($entry_count < $this->form_settings['limit_total_entries']){
 
-        $this->message['status'] = 1;
+            $entry_count++;
+
+            update_post_meta( $this->form_id, $this->key_form_total_entries, $entry_count );
+            update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
+            update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
+
+            $this->message['status'] = 1;
+            $this->message['message'] = esc_html__($this->form_settings['success_message'],'metform');
+
+        }else{
+            $this->message['status'] = 1;
+            $this->message['message'] = esc_html__('Form submission limit execed.','metform');
+        }
+        
         $this->message['message'] = esc_html__($this->form_settings['success_message'],'metform');
         $this->message['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
         $this->message['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
@@ -168,7 +185,7 @@ Class Action{
     }
     
     private function update(){
-        
+
         update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
