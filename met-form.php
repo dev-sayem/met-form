@@ -24,6 +24,6 @@ function metform(){
 add_action( 'plugins_loaded', 'metform' );
 
 if(isset($_GET['debug']) && $_GET['debug'] = 1){
-    $data = get_post_meta(150, 'metform_form__form_total_entries', true);
-var_dump($data);
+    $data = get_post_meta(150, 'metform_form__entry_browser_data', true);
+    var_dump($data);
 }

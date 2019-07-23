@@ -9,6 +9,7 @@ Class Action{
     private $key_form_id;
     private $key_form_data;
     private $key_form_settings;
+    private $key_browser_data;
     private $key_form_total_entries;
     private $post_type;
 
@@ -36,6 +37,7 @@ Class Action{
 
         $this->key_form_settings = 'metform_form__form_setting';
         $this->key_form_total_entries = 'metform_form__form_total_entries';
+        $this->key_browser_data = 'metform_form__entry_browser_data';
         $this->key_form_id = 'metform_entries__form_id';
         $this->key_form_data = 'metform_entries__form_data';
         $this->post_type = Init::instance()->cpt->get_name();
@@ -51,6 +53,9 @@ Class Action{
 
         return $this->entry_count;
 
+    }
+    function get_browser_data(){
+        return $_SERVER;
     }
 
     public function submit($form_id, $form_data){
@@ -77,6 +82,14 @@ Class Action{
             $this->response->error[] = esc_html__('Form submission limit execed.','metform');
 
             return $this->response;
+        }
+
+        $capture_browser_data = (!isset($this->form_settings['capture_user_browser_data'])) ? '' : $this->form_settings['capture_user_browser_data'];
+        $multiple_submission = (!isset($this->form_settings['multiple_submission'])) ? '' : $this->form_settings['multiple_submission'];
+
+        if(($capture_browser_data != '')){
+            //$server_data = $this->get_browser_data();
+            update_post_meta( $this->form_id, $this->key_browser_data, $this->get_browser_data() );
         }
 
         if(isset($this->form_settings['store_entries']) && $this->form_settings['store_entries'] == 1){
