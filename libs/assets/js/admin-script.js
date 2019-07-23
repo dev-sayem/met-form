@@ -82,6 +82,17 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $('input.mf-form-modalinput-capture_user_browser_data').click(function(){
+        if($(this).is(":checked")){
+            $('#multiple_submission').removeClass('hide_input');
+            $('#multiple_submission').addClass('show_input');
+        }
+        else if($(this).is(":not(:checked)")){
+            $('#multiple_submission').removeClass('show_input');
+            $('#multiple_submission').addClass('hide_input');
+        }
+    });
+
     function MetForm_Form_Editor(data) {
 
         //console.log(data);
@@ -137,6 +148,8 @@ jQuery(document).ready(function ($) {
         var capture_user_browser_data = $('.mf-form-modalinput-capture_user_browser_data');
         if (data.capture_user_browser_data == '1') {
             capture_user_browser_data.attr('checked', true);
+            $('#multiple_submission').removeClass('hide_input');
+            $('#multiple_submission').addClass('show_input');
         } else {
             capture_user_browser_data.removeAttr('checked');
         }
