@@ -183,25 +183,40 @@ Class Action{
         $entry_count = get_post_meta($this->form_id, $this->key_form_total_entries, true);
         $entry_count = ($entry_count == '') ? 1 : ((int)$entry_count);
 
-        if($entry_count < $this->form_settings['limit_total_entries']){
+        $entry_limit = ((int)($this->form_settings['limit_total_entries_status']));
+
+        if($entry_limit == 1){
+
+            if($entry_count < $this->form_settings['limit_total_entries']){
+
+                $entry_count++;
+    
+                update_post_meta( $this->form_id, $this->key_form_total_entries, $entry_count );
+                update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
+                update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
+    
+                $this->message->status = 1;
+                $this->message->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
+    
+            }else{
+    
+                $this->message->status = 0;
+                $this->message->error[] = esc_html__('Form submission limit execed.','metform');
+    
+            }
+
+        }else{
 
             $entry_count++;
-
             update_post_meta( $this->form_id, $this->key_form_total_entries, $entry_count );
             update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
             update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
             $this->message->status = 1;
             $this->message->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
-
-        }else{
-
-            $this->message->status = 0;
-            $this->message->error[] = esc_html__('Form submission limit execed.','metform');
-
+            
         }
 
-        //$this->message->data['form_limit'] = esc_html__($this->form_settings['limit_total_entries'],'metform');
         $this->message->data['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
         $this->message->data['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
         
