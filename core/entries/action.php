@@ -75,7 +75,7 @@ Class Action{
             return $this->response;
         }
 
-        $entry_limit = ((int)($this->form_settings['limit_total_entries_status']));
+        $entry_limit = ((int)($this->form_settings['limit_total_entries']));
 
         if(($entry_limit == 1) && ($this->get_entry_count() >= $this->form_settings['limit_total_entries'])){
             $this->response->status = 0;
