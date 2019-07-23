@@ -91,11 +91,11 @@ jQuery(document).ready(function ($) {
         $('.mf-form-modalinput-redirect_to').val(data.redirect_to);
         $('.mf-form-modalinput-limit_total_entries').val(data.limit_total_entries);
 
-        var capture_entries = $('.mf-form-modalinput-capture_entries');
-        if (data.capture_entries == '1') {
-            capture_entries.attr('checked', true);
+        var store_entries = $('.mf-form-modalinput-store_entries');
+        if (data.store_entries == '1') {
+            store_entries.attr('checked', true);
         } else {
-            capture_entries.removeAttr('checked');
+            store_entries.removeAttr('checked');
         }
 
         var hide_form_after_submission = $('.mf-form-modalinput-hide_form_after_submission');

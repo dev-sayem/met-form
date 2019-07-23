@@ -18,12 +18,13 @@ Class Action{
     private $form_data;
     private $form_settings;
     private $title;
+    private $entry_count;
 
-    private $message;
+    private $response;
 
     public function __construct()
     {
-        $this->message = (object)[
+        $this->response = (object)[
             'status' => 0,
             'error' => [
                 esc_html__('some thing went wrong.','metrom'),
@@ -41,23 +42,44 @@ Class Action{
 
     }
 
-    public function check_settings($form_id, $form_data){
+    public function get_entry_count(){
+        if($this->entry_count != null){
+            return $this->entry_count;
+        }
+        $this->entry_count = get_post_meta($this->form_id, $this->key_form_total_entries, true);
+        $this->entry_count = ($this->entry_count == '') ? 1 : ((int)$this->entry_count);
+
+        return $this->entry_count;
+
+    }
+
+    public function submit($form_id, $form_data){
 
         $this->form_id = $form_id;
 
         $this->form_settings = get_post_meta($form_id, $this->key_form_settings, true);
 
+        $this->response->data['redirect_to'] = (!isset($this->form_settings['redirect_to'])) ? '' : $this->form_settings['redirect_to'];
+        $this->response->data['hide_form'] = (!isset($this->form_settings['hide_form_after_submission']) ? '' : $this->form_settings['hide_form_after_submission']);
+        
         $required_loggin = isset($this->form_settings['require_login']) ? ((int)($this->form_settings['require_login'])) : 0;
 
         if(($required_loggin == 1) && (!is_user_logged_in())){
-            $this->message->status = 0;
-            $this->message->error[] = esc_html__('You must be logged in to submit form.','metform');
-            $this->message->data['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
-            $this->message->data['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
-            return $this->message;
+            $this->response->status = 0;
+            $this->response->error[] = esc_html__('You must be logged in to submit form.','metform');
+            return $this->response;
         }
 
-        if(isset($this->form_settings['capture_entries']) && $this->form_settings['capture_entries'] == 1){
+        $entry_limit = ((int)($this->form_settings['limit_total_entries_status']));
+
+        if(($entry_limit == 1) && ($this->get_entry_count() >= $this->form_settings['limit_total_entries'])){
+            $this->response->status = 0;
+            $this->response->error[] = esc_html__('Form submission limit execed.','metform');
+
+            return $this->response;
+        }
+
+        if(isset($this->form_settings['store_entries']) && $this->form_settings['store_entries'] == 1){
 
             $this->store($this->form_id, $form_data);
 
@@ -71,10 +93,11 @@ Class Action{
 
         if(isset($this->form_settings['enable_admin_notification']) && $this->form_settings['enable_admin_notification'] == 1){
 
-            $this->send_admin_email($form_data);
-        }
+            $this->send_admin_email();
+        } 
 
-        return $this->message;
+        
+        return $this->response;
         
     }
 
@@ -88,19 +111,19 @@ Class Action{
         $user_email_attached_submision_copy = isset($this->form_settings['user_email_attach_submission_copy']) ? $this->form_settings['user_email_attach_submission_copy'] : null;
 
         if(!$user_mail){
-            $this->message->error[] = 'user mail not found';
+            $this->response->error[] = 'user mail not found';
         }else{
             $header [] = 'From : '.$from;
             $header [] = 'Reply to : '.$reply_to;
             $status = wp_mail($user_mail, $subject, $body, $header);
 
             if($status){
-                $this->message->data['message'] = esc_html__('mail sended to user','metform');
+                $this->response->data['message'] = esc_html__('mail sended to user','metform');
             }
         }
 
     }
-    public function send_admin_email($form_data){
+    public function send_admin_email(){
 
         $subject = isset($this->form_settings['admin_email_subject']) ? $this->form_settings['admin_email_subject'] : null;
         $from = isset($this->form_settings['admin_email_from']) ? $this->form_settings['admin_email_from'] : null;
@@ -116,7 +139,7 @@ Class Action{
         $status = wp_mail($admin_email, $subject, $body, $header);
 
         if($status){
-            $this->message->data['message'] = esc_html__('mail sended to admin','metform');
+            $this->response->data['message'] = esc_html__('mail sended to admin','metform');
         }
 
     }
@@ -160,7 +183,7 @@ Class Action{
         if($fields == null){
             $fields = $this->fields;
         }
-        foreach( $form_data as $key => $value){
+        foreach($form_data as $key => $value){
 
             if(isset($fields[$key])){
                 $this->form_data[ $key ] = $value;
@@ -180,45 +203,13 @@ Class Action{
         );
         $this->entry_id = wp_insert_post($defaults);
 
-        $entry_count = get_post_meta($this->form_id, $this->key_form_total_entries, true);
-        $entry_count = ($entry_count == '') ? 1 : ((int)$entry_count);
+        $this->entry_count++;
+        update_post_meta( $this->form_id, $this->key_form_total_entries, $this->entry_count );
+        update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
+        update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
-        $entry_limit = ((int)($this->form_settings['limit_total_entries_status']));
-
-        if($entry_limit == 1){
-
-            if($entry_count < $this->form_settings['limit_total_entries']){
-
-                $entry_count++;
-    
-                update_post_meta( $this->form_id, $this->key_form_total_entries, $entry_count );
-                update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
-                update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
-    
-                $this->message->status = 1;
-                $this->message->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
-    
-            }else{
-    
-                $this->message->status = 0;
-                $this->message->error[] = esc_html__('Form submission limit execed.','metform');
-    
-            }
-
-        }else{
-
-            $entry_count++;
-            update_post_meta( $this->form_id, $this->key_form_total_entries, $entry_count );
-            update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
-            update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
-
-            $this->message->status = 1;
-            $this->message->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
-            
-        }
-
-        $this->message->data['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
-        $this->message->data['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
+        $this->response->status = 1;
+        $this->response->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
         
     }
     
@@ -227,10 +218,8 @@ Class Action{
         update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
-        $this->message->status = 1;
-        $this->message->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
-        $this->message->data['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
-        $this->message->data['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
+        $this->response->status = 1;
+        $this->response->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
 
     }
 

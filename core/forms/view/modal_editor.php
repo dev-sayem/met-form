@@ -31,8 +31,8 @@
 							</div>
 							<br>
 							<div class="mf-input-group">
-								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Capture Entries :', 'metform'); ?></label>
-								<input type="checkbox" value="1" name="capture_entries" class="mf-admin-control-input mf-form-modalinput-capture_entries">
+								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Store Entries :', 'metform'); ?></label>
+								<input type="checkbox" value="1" name="store_entries" class="mf-admin-control-input mf-form-modalinput-store_entries">
 							</div>
 							<br>
 							<div class="mf-input-group">

@@ -31,11 +31,11 @@ jQuery(document).ready(function($) {
                     $("#msg").text(response.error[1]);
                 }
 
-                if(response.data['hide_form'] != 0){
+                if(response.data['hide_form'] != ''){
                     $('#insert_post').css('display','none');
                 }
 
-                if(response.data['redirect_to'] != 0){
+                if(response.data['redirect_to'] != ''){
                     console.log('redirect url: '+response.data['redirect_to']);
                     setTimeout( function(){ 
                         window.location.replace(response.data['redirect_to']);

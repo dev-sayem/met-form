@@ -94,8 +94,8 @@ Class Action{
             'success_message' => [ 
                 'name' => 'success_message',
             ],
-            'capture_entries' => [ 
-                'name' => 'capture_entries',
+            'store_entries' => [ 
+                'name' => 'store_entries',
             ], 
             'hide_form_after_submission' => [
                 'name' => 'hide_form_after_submission',
