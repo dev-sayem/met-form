@@ -5,32 +5,33 @@ jQuery(document).ready(function($) {
         //console.log("form data : "+form_data);
         //console.log("post url : "+post_url);
 
-        $.post(post_url, form_data, function(data) {
-            console.log("Response : "+data);
-            console.log("Response(user mail) : "+data['user']);
-            console.log("Response(admin mail) : "+data['admin']);
-            console.log("Response(entry count) : "+data['entry_count']);
+        $.post(post_url, form_data, function(response) {
+            console.log(response);
+            // console.log("Response(user mail) : "+data['user']);
+            // console.log("Response(admin mail) : "+data['admin']);
+            //console.log("Response(entry count) : "+data['entry_count']);
+            //console.log("Response(form limit) : "+data['form_limit']);
             //console.log("status : "+data['status']+" msg : "+data['message']);
-            var status = Number(data['status']);
+            var status = Number(response.status);
             if (status == 1) {
 
                 $("#msg").css("display","block");
                 $("#msg").css("background","#62ed12");
-                $("#msg").text(data['message']);
+                $("#msg").text(response.data['message']);
     
             } else {
                 
                 $("#msg").css("display","block");
-                $("#msg").css("background","#0beda9");
-                $("#msg").text(data['message']);
+                $("#msg").css("background","#dd3939");
+                $("#msg").text(response.error[1]);
             }
 
-            if(data['hide_form'] != 0){
+            if(response.data['hide_form'] != 0){
                 $('#insert_post').css('display','none');
             }
 
-            if(data['redirect_to'] != 0){
-                console.log('redirect url: '+data['redirect_to']);
+            if(response.data['redirect_to'] != 0){
+                console.log('redirect url: '+response.data['redirect_to']);
                 // setTimeout( function(){ 
                 //     window.location.replace(data['redirect_to']);
                 // }  , 1500 );

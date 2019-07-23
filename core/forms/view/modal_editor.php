@@ -107,7 +107,7 @@
 							</div>
 							<br>
 							<div class="mf-input-group">
-								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('User Notification Email Attached Submission Copy :', 'metform'); ?></label>
+								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Email Attached Submission Copy :', 'metform'); ?></label>
 								<input type="checkbox" value="1" name="user_email_attach_submission_copy" class="mf-admin-control-input mf-form-user-submission-copy">
 							</div>
 
@@ -144,7 +144,7 @@
 							</div>
 							<br>
 							<div class="mf-input-group">
-								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Admin Notification Email Attached Submission Copy :', 'metform'); ?></label>
+								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Email Attached Submission Copy :', 'metform'); ?></label>
 								<input type="checkbox" value="1" name="admin_email_attach_submission_copy" class="mf-admin-control-input mf-form-admin-submission-copy">
 							</div>
 
