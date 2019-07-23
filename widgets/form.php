@@ -46,7 +46,7 @@ class Widget_My_Form extends Widget_Base {
         echo '<div class="wrapper">'
 		?>
 		<p style="display: none; padding: 5px; margin: 5px; font-size: 16px" id='msg'></p>
-		<form id="insert_post" name="data_insert" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
+		<form id="insert_post" data-nonce="<?php echo wp_create_nonce('wp_rest');?>" action="<?php echo $rest_url; ?>metform/v1/entries/insert/<?php echo $id; ?>" method="POST">
             <br>
 			<input type="text" class="elementor-field" name="name" id="name" placeholder="Name">
 			<br>

@@ -49,9 +49,11 @@ Class Action{
 
         $required_loggin = isset($this->form_settings['require_login']) ? ((int)($this->form_settings['require_login'])) : 0;
 
-        if(($required_loggin == 1) && (is_user_logged_in() == false)){
+        if(($required_loggin == 1) && (!is_user_logged_in())){
             $this->message->status = 0;
             $this->message->error[] = esc_html__('You must be logged in to submit form.','metform');
+            $this->message->data['hide_form'] = esc_html__(isset($this->form_settings['hide_form_after_submission']) ? $this->form_settings['hide_form_after_submission'] : 0,'metform');
+            $this->message->data['redirect_to'] = esc_html__(isset($this->form_settings['redirect_to']) ? $this->form_settings['redirect_to'] : 0,'metform');
             return $this->message;
         }
 
@@ -194,8 +196,8 @@ Class Action{
 
         }else{
 
-            $this->message->status = 1;
-            $this->message->data['message'] = esc_html__('Form submission limit execed.','metform');
+            $this->message->status = 0;
+            $this->message->error[] = esc_html__('Form submission limit execed.','metform');
 
         }
 

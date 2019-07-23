@@ -94,6 +94,9 @@ final class Plugin{
     function Include_js_css_public(){
 
         wp_enqueue_script('functions', plugin_dir_url(__FILE__) . 'libs/assets/js/functions.js', array(), '1.0.0', true);
+        // wp_localize_script('functions', 'rest_api_login', [
+        //     'nonce' => wp_create_nonce('wp_rest'),
+        //   ]);
         
     }
 
