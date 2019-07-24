@@ -242,7 +242,7 @@ Class Action{
             'post_content' => '',
             'post_type' => $this->post_type,
         );
-        //$this->response->data['form_settings'] = $this->form_settings;
+        
         $this->entry_id = wp_insert_post($defaults);
 
         $this->response->data['form_id'] = $form_id;
@@ -252,8 +252,6 @@ Class Action{
         update_post_meta( $form_id, $this->key_form_total_entries, $this->entry_count );
         update_post_meta( $this->entry_id, $this->key_form_id, $form_id );
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
-        
-        //$this->response->data['form_settings'] = $form_settings;
 
         if(isset($form_settings['capture_user_browser_data']) && $form_settings['capture_user_browser_data'] == '1'){
             update_post_meta( $this->entry_id, $this->key_browser_data, $this->get_browser_data() );
