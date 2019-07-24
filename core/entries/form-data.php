@@ -4,6 +4,16 @@ namespace MetForm\Core\Entries;
 
 Class Form_Data{
 
+    public function __construct(){
+        $this->cpt = new Cpt();
+
+        add_action('add_meta_boxes', [$this,'add_form_id_cmb']);
+        //add_action('save_post', [$this,'store_form_id_cmb']);
+
+        add_action('add_meta_boxes', [$this,'add_form_data_cmb']);
+        add_action('save_post', [$this,'store_form_data_cmb']);
+    }
+
     function add_form_id_cmb()
     {
         add_meta_box(
@@ -51,6 +61,10 @@ Class Form_Data{
 
         $db_values = get_post_meta($post->ID, 'metform_entries__form_data', true);
 
+        $db_browser_data = get_post_meta($post->ID, 'metform_form__entry_browser_data', true);
+
+        $browser_data = (isset($db_browser_data)) ? $db_browser_data : "";
+
         $values = (isset($db_values)) ? $db_values : "";
 
         foreach($values as $key=>$value){
@@ -62,6 +76,18 @@ Class Form_Data{
             <?php
         }
 
+        if($browser_data != ""){
+            echo '<h4>Browser data : </h4>';
+            foreach($browser_data as $key=>$value){
+                ?>
+                <label for="<?php echo $key; ?>"><?php echo $key; ?> : </label>
+                <input type="text" name="<?php echo $key; ?>" value="<?php echo $value; ?>">
+                <br>
+                <br>
+                <?php
+            }
+        }
+
     }
 
     function store_form_data_cmb($post_id){
@@ -69,18 +95,7 @@ Class Form_Data{
         $form_data = $_POST;
         $form_id = get_post_meta($post_id, 'metform_entries__form_id', true);
 
-        Action::instance()->store($form_id, $form_data,$post_id);
-    }
-
-    public function __construct()
-    {
-        $this->cpt = new Cpt();
-
-        add_action('add_meta_boxes', [$this,'add_form_id_cmb']);
-        //add_action('save_post', [$this,'store_form_id_cmb']);
-
-        add_action('add_meta_boxes', [$this,'add_form_data_cmb']);
-        add_action('save_post', [$this,'store_form_data_cmb']);
+        Action::instance()->submit($form_id, $form_data, $post_id);
     }
 
 }

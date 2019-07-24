@@ -54,8 +54,22 @@ Class Action{
         return $this->entry_count;
 
     }
-    function get_browser_data(){
-        return $_SERVER;
+    public function get_browser_data(){
+
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        return [
+            'ip' => $ip,
+            'user_agent' => $user_agent,
+        ];
     }
 
     public function submit($form_id, $form_data){
@@ -84,17 +98,24 @@ Class Action{
             return $this->response;
         }
 
-        $capture_browser_data = (!isset($this->form_settings['capture_user_browser_data'])) ? '' : $this->form_settings['capture_user_browser_data'];
-        $multiple_submission = (!isset($this->form_settings['multiple_submission'])) ? '' : $this->form_settings['multiple_submission'];
+        // $multiple_submission = (!isset($this->form_settings['multiple_submission'])) ? '' : $this->form_settings['multiple_submission'];
 
-        if(($capture_browser_data != '')){
-            //$server_data = $this->get_browser_data();
-            update_post_meta( $this->form_id, $this->key_browser_data, $this->get_browser_data() );
-        }
+        // if($multiple_submission == '' && isset($_COOKIE['metform_form_submitted'])){
+            
+        //     $this->response->status = 0;
+        //     $this->response->error[] = esc_html__('You can not submit this form multiple.','metform');
+        //     return $this->response;
+
+        // }else{
+
+        //     $visit_time = date('d-m-Y g:i a');
+        //     setcookie('metform_form_submitted',  $visit_time, time()+86400);
+
+        // }
 
         if(isset($this->form_settings['store_entries']) && $this->form_settings['store_entries'] == 1){
 
-            $this->store($this->form_id, $form_data);
+            $this->store($form_id, $form_data);
 
         }
 
@@ -131,6 +152,7 @@ Class Action{
             $status = wp_mail($user_mail, $subject, $body, $header);
 
             if($status){
+                $this->response->status = 1;
                 $this->response->data['message'] = esc_html__('mail sended to user','metform');
             }
         }
@@ -152,6 +174,7 @@ Class Action{
         $status = wp_mail($admin_email, $subject, $body, $header);
 
         if($status){
+            $this->response->status = 1;
             $this->response->data['message'] = esc_html__('mail sended to admin','metform');
         }
 
@@ -159,15 +182,16 @@ Class Action{
 
     public function store($form_id, $form_data, $entry_id = null){
         
+        $this->form_id = $form_id;
         $this->fields = $this->get_fields();
         $this->sanitize($form_data);
         $this->entry_id = $entry_id;
 
         if( $this->entry_id == null ){
-            return $this->insert();
+            $this->insert();
         }
         else {
-            return $this->update();
+            $this->update();
         }
 
     }
@@ -206,23 +230,39 @@ Class Action{
     }
     
     private function insert(){
+        
+        $form_settings = $this->form_settings;
+        $form_id = $this->form_id;
 
         $this->title = get_the_title($this->form_id);
-
+        
         $defaults = array(
             'post_title' => $this->title,
             'post_status' => 'publish',
+            'post_content' => '',
             'post_type' => $this->post_type,
         );
+        //$this->response->data['form_settings'] = $this->form_settings;
         $this->entry_id = wp_insert_post($defaults);
 
+        $this->response->data['form_id'] = $form_id;
+        $this->response->data['form_settings'] = $form_settings;
+
         $this->entry_count++;
-        update_post_meta( $this->form_id, $this->key_form_total_entries, $this->entry_count );
-        update_post_meta( $this->entry_id, $this->key_form_id, $this->form_id );
+        update_post_meta( $form_id, $this->key_form_total_entries, $this->entry_count );
+        update_post_meta( $this->entry_id, $this->key_form_id, $form_id );
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
+        
+        //$this->response->data['form_settings'] = $form_settings;
+
+        if(isset($form_settings['capture_user_browser_data']) && $form_settings['capture_user_browser_data'] == '1'){
+            update_post_meta( $this->entry_id, $this->key_browser_data, $this->get_browser_data() );
+            $this->response->status = 1;
+            $this->response->data['message1'] = esc_html__('capture browser data','metform');
+        }
 
         $this->response->status = 1;
-        $this->response->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
+        $this->response->data['message'] = $form_settings['success_message'];
         
     }
     
@@ -232,7 +272,7 @@ Class Action{
         update_post_meta( $this->entry_id, $this->key_form_data, $this->form_data );
 
         $this->response->status = 1;
-        $this->response->data['message'] = esc_html__($this->form_settings['success_message'],'metform');
+        $this->response->data['message'] = $this->form_settings['success_message'];
 
     }
 

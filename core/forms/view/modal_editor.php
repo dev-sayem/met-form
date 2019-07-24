@@ -63,11 +63,11 @@
 								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Capture User Browser Data :', 'metform'); ?></label>
 								<input type="checkbox" value="1" name="capture_user_browser_data" class="mf-admin-control-input mf-form-modalinput-capture_user_browser_data">
 							</div>
-							<br>
+							<!-- <br>
 							<div class="mf-input-group hide_input" id="multiple_submission">
 								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Multiple Submission :', 'metform'); ?></label>
 								<input type="checkbox" value="1" name="multiple_submission" class="mf-admin-control-input mf-form-modalinput-multiple_submission">
-							</div>
+							</div> -->
 							<!-- <br>
 							<div class="mf-input-group">
 								<label for="attr-input-label" class="attr-input-label"><?php esc_html_e('Enable Recaptcha :', 'metform'); ?></label>
